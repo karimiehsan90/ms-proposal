@@ -1,0 +1,10 @@
+---
+mongodb_user:
+mongodb_group:
+mongodb_log_dir:
+mongodb_query_router_config:
+mongodb_query_router_port:
+mongodb_config_servers_hosts:
+mongodb_config_server_port:
+mongodb_path:
+mongodb_bind_ip:

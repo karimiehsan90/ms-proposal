@@ -1,0 +1,6 @@
+[Service]
+ExecStart={{ mongodb_path }}/bin/mongos \
+    --config {{ mongodb_query_router_config }}
+
+User={{ mongodb_user }}
+Group={{ mongodb_group }}

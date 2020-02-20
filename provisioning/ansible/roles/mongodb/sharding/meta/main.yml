@@ -1,0 +1,11 @@
+---
+galaxy_info:
+  author: Ehsan Karimi
+  description: Ansible role to install mongodb shards
+  company: SBU
+  license: Apache
+  min_ansible_version: 2.7.16
+
+  galaxy_tags: []
+
+dependencies: []

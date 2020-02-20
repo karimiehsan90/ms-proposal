@@ -1,0 +1,12 @@
+---
+- name: Assert mandatory variables
+  assert:
+    that:
+      - mongodb_user | mandatory
+      - mongodb_group | mandatory
+      - mongodb_path | mandatory
+      - mongodb_query_router_port | int
+      - mongodb_shard_config | mandatory
+      - mongodb_shard_port | int
+      - mongodb_bind_ip | ipv4
+      - mongodb_shard_hosts | list

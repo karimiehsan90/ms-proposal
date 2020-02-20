@@ -1,0 +1,74 @@
+---
+- name: Ensure mongodb group exists
+  group:
+    name: "{{ mongodb_group }}"
+    state: present
+  become: true
+
+- name: Ensure mongodb user exists
+  user:
+    name: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+    state: present
+  become: true
+
+- name: Ensure prerequisites installed
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  become: true
+  loop:
+    - libcurl3
+    - openssl
+
+- name: Ensure pymongo exists
+  pip:
+    name: pymongo
+    state: present
+  become: true
+
+
+- name: Download mongodb tarball
+  get_url:
+    dest: "{{ mongodb_dir }}"
+    url: "{{ mongodb_tarball_url }}"
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+  become: true
+
+- name: Unarchive mongodb tarball
+  unarchive:
+    creates: "{{ mongodb_dir }}/{{ mongodb_dir_name }}"
+    dest: "{{ mongodb_dir }}"
+    group: "{{ mongodb_group }}"
+    owner: "{{ mongodb_user }}"
+    remote_src: yes
+    src: "{{ mongodb_dir }}/{{ mongodb_tarball_name }}"
+  become: true
+
+- name: Create symlink directory
+  file:
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+    path: "{{ mongodb_path }}"
+    src: "{{ mongodb_dir }}/{{ mongodb_dir_name }}"
+    state: link
+  become: true
+
+- name: Ensure lib and log directories exists
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+  become: true
+  loop:
+    - "{{ mongodb_data_dir }}"
+    - "{{ mongodb_log_dir }}"
+
+- name: "Ensure {{ mongodb_path }}/bin exists in PATH"
+  lineinfile:
+    path: ~/.bashrc
+    line: "export PATH=$PATH:{{ mongodb_path }}/bin"
+    state: present

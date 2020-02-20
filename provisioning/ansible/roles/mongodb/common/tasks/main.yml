@@ -1,0 +1,6 @@
+---
+- name: Check
+  import_tasks: check.yml
+
+- name: Install
+  import_tasks: install.yml

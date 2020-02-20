@@ -1,0 +1,10 @@
+---
+mongodb_bind_ip:
+mongodb_shard_port:
+mongodb_shard_config:
+mongodb_path:
+mongodb_user:
+mongodb_group:
+mongodb_data_dir:
+mongodb_query_router_port:
+mongodb_shard_hosts:

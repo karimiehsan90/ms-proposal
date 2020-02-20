@@ -1,0 +1,9 @@
+---
+- name: Ensure config file exists
+  template:
+    src: mongosh.conf.j2
+    dest: "{{ mongodb_shard_config }}"
+    owner: "{{ mongodb_user }}"
+    group: "{{ mongodb_group }}"
+  become: true
+  notify: Restart mongosh

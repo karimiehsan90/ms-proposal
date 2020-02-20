@@ -1,0 +1,11 @@
+---
+net:
+    bindIp: {{ mongodb_bind_ip }}
+    port: {{ mongodb_shard_port }}
+
+storage:
+    dbPath: {{ mongodb_data_dir }}
+
+replication:
+    replSetName: rs0
+    enableMajorityReadConcern: true

@@ -1,0 +1,12 @@
+---
+- hosts: mongodb-masters
+  roles:
+    - mongodb/config-server
+
+- hosts: mongodb-machines
+  roles:
+    - mongodb/query-router
+
+- hosts: mongodb-slaves
+  roles:
+    - mongodb/sharding

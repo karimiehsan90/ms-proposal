@@ -1,0 +1,10 @@
+---
+- name: Ensure service file exists
+  template:
+    src: mongosh.service.j2
+    dest: /etc/systemd/system/mongosh.service
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+  notify: Restart mongosh

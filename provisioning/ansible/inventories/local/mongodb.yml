@@ -1,0 +1,13 @@
+---
+mongodb-machines:
+  children:
+    mongodb-masters:
+    mongodb-slaves:
+
+mongodb-masters:
+  children:
+    masters:
+
+mongodb-slaves:
+  children:
+    slaves:

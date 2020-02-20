@@ -1,0 +1,6 @@
+[Service]
+ExecStart={{ mongodb_path }}/bin/mongod --configsvr \
+    --config {{ mongodb_config_file }}
+
+User={{ mongodb_user }}
+Group={{ mongodb_group }}

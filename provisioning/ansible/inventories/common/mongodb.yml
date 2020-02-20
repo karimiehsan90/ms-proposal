@@ -1,0 +1,29 @@
+---
+mongodb-machines:
+  vars:
+    mongodb_version: 3.6.17
+    mongodb_dir_name: "mongodb-linux-x86_64-ubuntu1604-{{ mongodb_version }}"
+    mongodb_tarball_name: "{{ mongodb_dir_name }}.tgz"
+    mongodb_repository_url: http://main:8080
+    mongodb_tarball_url: "{{ mongodb_repository_url }}/{{ mongodb_tarball_name }}"
+    mongodb_dir: /opt
+    mongodb_user: mongodb
+    mongodb_group: mongodb
+    mongodb_path: /opt/mongodb
+    mongodb_log_dir: /var/log/mongodb
+    mongodb_data_dir: /var/lib/mongo
+    mongodb_query_router_config: /etc/mongos.conf
+    mongodb_query_router_port: 27017
+    mongodb_config_servers_hosts: "{{ groups['mongodb-masters'] }}"
+    mongodb_config_server_port: 27019
+    mongodb_bind_ip: 0.0.0.0
+
+mongodb-masters:
+  vars:
+    mongodb_config_file: /etc/mongod.conf
+
+mongodb-slaves:
+  vars:
+    mongodb_shard_port: 27018
+    mongodb_shard_config: /etc/mongosh.conf
+    mongodb_shard_hosts: "{{ groups['mongodb-slaves'] }}"
