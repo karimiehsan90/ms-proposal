@@ -1,4 +1,4 @@
-
+const webpack = require("webpack");
 export default {
   mode: 'universal',
   /*
@@ -36,8 +36,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/antd-ui' ,
-    {src: '~plugins/datePicker.js', ssr: false}
+    //'@/plugins/antd-ui' ,
+    {src: '~plugins/datePicker.js', ssr: false},
   ],
   /*
   ** Nuxt.js dev-modules
@@ -48,15 +48,35 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+
   ],
   /*
   ** Build configuration
   */
   build: {
+    babel: {
+      plugins: [
+        [
+          "import",
+          { libraryName: 'ant-design-vue', style: 'css' }
+        ]
+      ]
+    },
     /*
-    ** You can extend webpack config here
+    ** Run ESLint on save
     */
-    extend (config, ctx) {
-    }
+    vendor: ["jquery", "bootstrap"],
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery'
+      }),
+      //new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    ],
+    extend(config) {
+
+    },
+
   }
 }

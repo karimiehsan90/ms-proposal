@@ -20,5 +20,7 @@
     "vue-persian-datetime-picker": "^2.1.4",
     "vuelidate": "^0.7.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack": "^4.42.1"
+  }
 }
