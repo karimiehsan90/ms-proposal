@@ -47,7 +47,7 @@ export default {
   },
     data(){
       return{
-          form: this.$form.createForm(this, { name: 'login' })
+          form: this.$form.createForm(this, { name: 'login' }),
       }
     },
     mounted() {
