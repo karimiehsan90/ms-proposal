@@ -1,0 +1,24 @@
+---
+systemLog:
+    destination: file
+    path: {{ mongodb_log_dir }}/mongodb.log
+    logAppend: true
+    logRotate: reopen
+
+net:
+    port: {{ mongodb_config_server_port }}
+    bindIp: {{ mongodb_bind_ip }}
+
+storage:
+    dbPath: {{ mongodb_data_dir }}
+    directoryPerDB: true
+    wiredTiger:
+        engineConfig:
+            directoryForIndexes: true
+
+replication:
+    replSetName: rs0
+    enableMajorityReadConcern: true
+
+sharding:
+    clusterRole: configsvr

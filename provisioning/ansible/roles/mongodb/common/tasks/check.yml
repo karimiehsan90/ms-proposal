@@ -1,0 +1,15 @@
+---
+- name: Assert mandatory variables
+  assert:
+    that:
+        - mongodb_version | mandatory
+        - mongodb_dir_name | mandatory
+        - mongodb_tarball_name | mandatory
+        - mongodb_repository_url | mandatory
+        - mongodb_tarball_url | mandatory
+        - mongodb_dir | mandatory
+        - mongodb_user | mandatory
+        - mongodb_group | mandatory
+        - mongodb_path | mandatory
+        - mongodb_log_dir | mandatory
+        - mongodb_data_dir | mandatory

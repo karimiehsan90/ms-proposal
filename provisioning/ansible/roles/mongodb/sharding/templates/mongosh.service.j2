@@ -1,0 +1,6 @@
+[Service]
+ExecStart={{ mongodb_path }}/bin/mongod --shardsvr --replSet rs1 \
+    --config {{ mongodb_shard_config }}
+
+User={{ mongodb_user }}
+Group={{ mongodb_group }}

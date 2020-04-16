@@ -1,0 +1,12 @@
+---
+systemLog:
+    destination: file
+    logAppend: true
+    path: {{ mongodb_log_dir }}/mongos.log
+
+net:
+    port: {{ mongodb_query_router_port }}
+    bindIp: {{ mongodb_bind_ip }}
+
+sharding:
+    configDB: "rs0/{{ mongodb_config_servers_hosts | zip_longest([], fillvalue=mongodb_config_server_port) | map('join', ':') | list | join(',') }}"

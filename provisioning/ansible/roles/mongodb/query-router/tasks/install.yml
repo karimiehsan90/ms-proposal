@@ -1,0 +1,10 @@
+---
+- name: Ensure systemd file exists
+  template:
+    src: mongos.service.d.j2
+    dest: /etc/systemd/system/mongos.service
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+  notify: Restart mongos

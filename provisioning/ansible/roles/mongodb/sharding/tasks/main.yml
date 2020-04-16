@@ -1,0 +1,20 @@
+---
+- name: Check
+  import_tasks: check.yml
+
+- name: Run common role
+  include_role:
+    name: mongodb/common
+    tasks_from: main
+
+- name: Install
+  import_tasks: install.yml
+
+- name: Config
+  import_tasks: config.yml
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Post install
+  import_tasks: post-install.yml
