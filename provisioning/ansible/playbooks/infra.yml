@@ -1,4 +1,6 @@
 ---
 - import_playbook: infra/etc-hosts.yml
 
+- import_playbook: infra/iptables.yml
+
 - import_playbook: infra/mongodb.yml
