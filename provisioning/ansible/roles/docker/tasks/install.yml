@@ -1,0 +1,12 @@
+---
+- name: Ensure docker.io installed
+  become: true
+  apt:
+    name: docker.io
+    state: present
+
+- name: Ensure docker python module installed
+  become: true
+  pip:
+    name: docker
+    state: present
