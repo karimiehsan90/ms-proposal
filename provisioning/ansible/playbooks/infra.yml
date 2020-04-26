@@ -1,6 +1,6 @@
 ---
 - name: Install pip
-  hosts: all
+  hosts: project-machines
   tasks:
    - name: Ensure python packages installed
      apt:
