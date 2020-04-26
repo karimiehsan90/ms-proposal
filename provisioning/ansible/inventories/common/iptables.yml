@@ -1,0 +1,6 @@
+---
+all:
+  vars:
+    iptables_allowed_hosts: "{{ groups['all'] }}"
+    iptables_allowed_ports:
+     - 22
