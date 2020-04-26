@@ -1,6 +1,7 @@
 ---
 - name: Ensure mongo is up
   wait_for:
+    host: "{{ inventory_hostname }}"
     port: "{{ mongodb_config_server_port }}"
     delay: 10
     timeout: 300
@@ -9,5 +10,6 @@
   mongodb_replicaset:
     members: "{{ mongodb_config_servers_hosts | zip_longest([], fillvalue=mongodb_config_server_port) | map('join', ':') | list }}"
     login_port: "{{ mongodb_config_server_port }}"
+    login_host: "{{ inventory_hostname }}"
     validate: no
   run_once: true

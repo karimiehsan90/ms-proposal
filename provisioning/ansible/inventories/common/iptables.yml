@@ -1,5 +1,5 @@
 ---
-all:
+project-machines:
   vars:
     iptables_allowed_hosts: "{{ groups['all'] }}"
     iptables_allowed_ports:

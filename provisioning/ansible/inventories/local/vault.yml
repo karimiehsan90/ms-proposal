@@ -1,4 +1,4 @@
-all:
+project-machines:
   vars:
     ansible_ssh_pass: !vault |
       $ANSIBLE_VAULT;1.1;AES256
