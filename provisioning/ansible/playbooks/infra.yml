@@ -1,2 +1,20 @@
 ---
+- name: Install pip
+  hosts: project-machines
+  tasks:
+   - name: Ensure python packages installed
+     apt:
+       name:
+        - python3
+        - python3-pip
+       state: present
+       update_cache: true
+     become: true
+
+- import_playbook: infra/etc-hosts.yml
+
+- import_playbook: infra/iptables.yml
+
+- import_playbook: infra/docker.yml
+
 - import_playbook: infra/mongodb.yml

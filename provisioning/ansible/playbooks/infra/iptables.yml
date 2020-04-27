@@ -1,0 +1,4 @@
+---
+- hosts: project-machines
+  roles:
+   - iptables

@@ -3,13 +3,14 @@
   mongodb_replicaset:
     members: "{{ mongodb_shard_hosts | zip_longest([], fillvalue=mongodb_shard_port) | map('join', ':') | list }}"
     login_port: "{{ mongodb_shard_port }}"
+    login_host: "{{ inventory_hostname }}"
     validate: no
     replica_set: rs1
   run_once: true
 
 - name: Ensure shards exists
   mongodb_shard:
-    login_host: localhost
+    login_host: "{{ inventory_hostname }}"
     login_port: "{{ mongodb_query_router_port }}"
     shard: "rs1/{{ mongodb_shard_hosts | zip_longest([], fillvalue=mongodb_shard_port) | map('join', ':') | list | join(',') }}"
     state: present

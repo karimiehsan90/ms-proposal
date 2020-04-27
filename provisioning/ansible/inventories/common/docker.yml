@@ -1,0 +1,12 @@
+---
+project-machines:
+  vars:
+    docker_registry_port: 5000
+    docker_insecure_registries:
+     - "{{ groups['docker-registry'] | first }}:{{ docker_registry_port }}"
+    docker_sample_image_post_check: m.docker-registry.ir/alpine
+
+docker-registry:
+  vars:
+    docker_registry_container_name: registry
+    docker_registry_data_dir: /home/vagrant/registry
