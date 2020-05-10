@@ -1,0 +1,8 @@
+---
+- name: Download jenkins
+  become: true
+  get_url:
+    url: "{{ jenkins_url }}"
+    dest: "{{ jenkins_tomcat_webapps }}/jenkins.war"
+    owner: "{{ jenkins_tomcat_user }}"
+    group: "{{ jenkins_tomcat_group }}"

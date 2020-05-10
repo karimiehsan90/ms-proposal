@@ -1,5 +1,5 @@
 ---
-project-machines:
+all:
   vars:
     docker_registry_port: 5000
     docker_insecure_registries:

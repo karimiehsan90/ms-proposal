@@ -1,0 +1,5 @@
+---
+- name: Validate tomcat started
+  wait_for:
+    port: "{{ tomcat_port }}"
+    timeout: 30

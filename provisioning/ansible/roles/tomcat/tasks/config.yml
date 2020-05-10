@@ -1,0 +1,18 @@
+---
+- name: Copy config file
+  become: true
+  template:
+    src: server.xml.j2
+    dest: "{{ tomcat_path }}/conf/server.xml"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+  notify: Restart tomcat
+
+- name: Create symlink directory for logs
+  become: true
+  file:
+    src: "{{ tomcat_path }}/logs"
+    dest: /var/log/tomcat
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    state: link

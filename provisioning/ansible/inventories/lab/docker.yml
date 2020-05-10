@@ -1,0 +1,5 @@
+---
+# It is just to docker work and isn't for lab
+docker-registry:
+  hosts:
+    main:
