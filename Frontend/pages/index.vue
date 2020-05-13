@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <br>
-    <a-form layout="inline" :form="form" @submit="handleSubmit">
+    <a-form layout="inline" :form="form" class="clearfix  mt-5 mb-2" @submit="handleSubmit">
       <a-form-item>
         <a-input
           v-decorator="[
@@ -31,6 +31,9 @@
         </a-button>
       </a-form-item>
     </a-form>
+    <div :class="status?'text-success':'text-danger'">
+      {{test}}
+    </div>
   </div>
 </template>
 
@@ -48,19 +51,42 @@ export default {
     data(){
       return{
           form: this.$form.createForm(this, { name: 'login' }),
+          test:'',
+          status:false,
       }
     },
     mounted() {
       $(document).ready(function () {
          console.log("Bia Karim inam az Jquery! :) \nvali ba axios request mizanimaaa! hanooz addesh nakrdm ==> w8 yekam :)")
       })
+
     },
+
     methods:{
         handleSubmit(e) {
             e.preventDefault();
+            this.test = ''
             this.form.validateFields((err, values) => {
                 if (!err) {
-                    console.log('Karim Khan! Make Request to server pls ' , values);
+                     // console.log('Karim Khan! Make Request to server pls ' , values.password);
+                     let pass = values.password
+                     let us = values.userName
+                    this.$axios
+                        .post('http://localhost:6060/auth/login', null, { params: {
+                                username : us,
+                                password :pass
+                            }})
+                        .then(response => {
+                            this.status = response.data.success
+                            if (!response.data.success)
+                              this.test = response.data.error
+                            else
+                                this.test = 'هوراااااا'
+                            setTimeout(function(){ this.test = '' }, 3000);
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
                 }
             });
         },
@@ -72,7 +98,6 @@ export default {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
