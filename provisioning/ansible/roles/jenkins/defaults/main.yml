@@ -1,0 +1,5 @@
+---
+jenkins_url:
+jenkins_tomcat_webapps: "{{ tomcat_path }}/webapps"
+jenkins_tomcat_user: "{{ tomcat_user }}"
+jenkins_tomcat_group: "{{ tomcat_group }}"

@@ -1,0 +1,8 @@
+---
+- name: Restart tomcat
+  become: true
+  service:
+    name: tomcat
+    daemon_reload: true
+    enabled: true
+    state: restarted

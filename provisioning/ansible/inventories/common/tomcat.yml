@@ -1,0 +1,17 @@
+---
+manager:
+  vars:
+    tomcat_group: tomcat
+    tomcat_user: tomcat
+    tomcat_version: 8.5.47
+    tomcat_dir_dest: /opt
+    tomcat_port: 8080
+    tomcat_path: /opt/tomcat
+    tomcat_tarball_url: "https://archive.apache.org/dist/tomcat/tomcat-8/v{{ tomcat_version }}/bin/{{ tomcat_dirname }}.tar.gz"
+    tomcat_artifacts:
+      - http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+      - https://app.vagrantup.com/generic/boxes/ubuntu1604/versions/2.0.6/providers/libvirt.box
+      - https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-3.6.17.tgz
+      - https://mirror.synyx.de/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+      - https://releases.hashicorp.com/vagrant/2.2.5/vagrant_2.2.5_x86_64.deb
+    jenkins_url: http://main:8080/jenkins.war
