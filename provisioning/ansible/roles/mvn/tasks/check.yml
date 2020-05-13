@@ -1,0 +1,9 @@
+---
+- name: Check required variables
+  assert:
+    that:
+      - mvn_tarball_url | mandatory
+      - mvn_dir_dest | mandatory
+      - mvn_tarball_name | mandatory
+      - mvn_dirname | mandatory
+      - mvn_path | mandatory

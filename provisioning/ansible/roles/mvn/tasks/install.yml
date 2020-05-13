@@ -1,0 +1,22 @@
+---
+- name: Download mvn tarball
+  become: true
+  get_url:
+    url: "{{ mvn_tarball_url }}"
+    dest: "{{ mvn_dir_dest }}"
+
+- name: Unarchieve mvn tarball
+  become: true
+  unarchive:
+    src: "{{ mvn_dir_dest }}/{{ mvn_tarball_name }}"
+    dest: "{{ mvn_dir_dest }}"
+    creates: "{{ mvn_dir_dest }}/{{ mvn_dirname }}"
+    remote_src: true
+
+- name: Ensure symlink exists
+  become: true
+  file:
+    src: "{{ mvn_dir_dest }}/{{ mvn_dirname }}/"
+    dest: "{{ mvn_path }}"
+    remote_src: true
+    state: link

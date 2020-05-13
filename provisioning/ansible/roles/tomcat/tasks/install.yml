@@ -1,0 +1,57 @@
+---
+- name: Ensure tomcat group exists
+  become: true
+  group:
+    name: "{{ tomcat_group }}"
+    state: present
+
+- name: Ensure tomcat user exists
+  become: true
+  user:
+    name: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    state: present
+
+- name: Download tomcat tarball
+  become: true
+  get_url:
+    url: "{{ tomcat_tarball_url }}"
+    dest: "{{ tomcat_dir_dest }}"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+
+- name: Unarchieve tomcat tarball
+  become: true
+  unarchive:
+    src: "{{ tomcat_dir_dest }}/{{ tomcat_tarball_name }}"
+    dest: "{{ tomcat_dir_dest }}"
+    creates: "{{ tomcat_dir_dest }}/{{ tomcat_dirname }}"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    remote_src: true
+
+- name: Create symlink to tomcat folder
+  become: true
+  file:
+    src: "{{ tomcat_dir_dest }}/{{ tomcat_dirname }}"
+    dest: "{{ tomcat_path }}"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    state: link
+
+- name: Copy service file
+  become: true
+  template:
+    src: tomcat.service.j2
+    dest: /etc/systemd/system/tomcat.service
+    owner: root
+    group: root
+  notify: Restart tomcat
+
+- name: Start tomcat
+  become: true
+  service:
+    name: tomcat
+    daemon_reload: true
+    enabled: true
+    state: started

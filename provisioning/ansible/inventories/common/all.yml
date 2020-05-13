@@ -4,3 +4,7 @@ all:
     etc_hosts: "{{ groups['all'] }}"
     etc_hosts_root_dns:
       - 8.8.8.8
+manager:
+  vars:
+    ansible_user: root
+    ansible_hostname: main

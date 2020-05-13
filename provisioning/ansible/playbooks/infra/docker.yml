@@ -1,5 +1,5 @@
 ---
-- hosts: project-machines
+- hosts: project-machines,manager
   roles:
    - docker
 

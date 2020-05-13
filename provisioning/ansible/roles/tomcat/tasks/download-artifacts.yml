@@ -1,0 +1,8 @@
+---
+- name: Download artifacts
+  get_url:
+    url: "{{ item }}"
+    dest: "{{ tomcat_path }}/webapps/ROOT/"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+  loop: "{{ tomcat_artifacts }}"

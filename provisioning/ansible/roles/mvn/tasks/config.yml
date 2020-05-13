@@ -1,0 +1,16 @@
+---
+- name: Add M2_HOME to /etc/environment
+  become: true
+  lineinfile:
+    path: /etc/environment
+    line: "{{ item }}"
+    state: present
+  loop:
+    - "M2_HOME={{ mvn_path }}"
+
+- name: Create symlink for mvn binaries
+  become: true
+  file:
+    src: "{{ mvn_path }}/bin/mvn"
+    dest: "/usr/bin/mvn"
+    state: link

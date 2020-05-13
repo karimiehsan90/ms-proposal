@@ -1,0 +1,11 @@
+---
+tomcat_group:
+tomcat_user:
+tomcat_version:
+tomcat_dirname: "apache-tomcat-{{ tomcat_version }}"
+tomcat_tarball_name: "{{ tomcat_dirname }}.tar.gz"
+tomcat_tarball_url:
+tomcat_dir_dest:
+tomcat_port:
+tomcat_path:
+tomcat_artifacts:

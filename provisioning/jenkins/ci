@@ -2,19 +2,27 @@ pipeline {
     agent any
 
     stages {
+        stage('Unit Test') {
+            steps {
+                sh './ms-proposal.sh unit-test'
+            }
+        }
+
         stage('Build') {
             steps {
-                echo 'Building...'
+                sh './ms-proposal.sh build'
             }
         }
-        stage('Test') {
+
+        stage('Prepare env') {
             steps {
-                echo 'Testing...'
+                sh './ms-proposal.sh prepare-env'
             }
         }
-        stage('Deploy') {
+
+        stage('Acceptance test') {
             steps {
-                echo 'Deploying...'
+                sh './ms-proposal.sh acceptance-test'
             }
         }
     }

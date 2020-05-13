@@ -1,0 +1,4 @@
+---
+- name: Validate mvn installed
+  command: mvn --version
+  changed_when: false
