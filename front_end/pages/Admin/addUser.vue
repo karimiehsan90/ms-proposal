@@ -3,15 +3,7 @@
         <h5 class="text-secondary my-2">افزودن کاربر</h5>
         <a-form :form="form" :colon="false" @submit="handleSubmit" class="w-75 mx-auto text-right">
             <div class="row">
-                <div class="col-sm">
-                    <a-form-item label="نام خانوادگی">
-                        <a-input
-                                class="text-right"
-                                v-decorator="['lastName', { rules: [{ required: true, message: 'لطفا نام خانوادگی را وارد کنید' }] }]"
-                        />
-                    </a-form-item>
-                </div>
-                <div class="col-sm">
+                <div class="col-md order-md-2">
                     <a-form-item label="نام">
                         <a-input
                                 class="text-right"
@@ -19,9 +11,17 @@
                         />
                     </a-form-item>
                 </div>
+                <div class="col-md">
+                    <a-form-item label="نام خانوادگی">
+                        <a-input
+                                class="text-right"
+                                v-decorator="['lastName', { rules: [{ required: true, message: 'لطفا نام خانوادگی را وارد کنید' }] }]"
+                        />
+                    </a-form-item>
+                </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-md">
                     <a-form-item label="کد ملی">
                         <a-input
                                 class="text-right"
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-md">
                     <a-form-item label="نقش">
                         <a-select
                                 v-decorator="['role',{ rules: [
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-md order-md-2">
                     <a-form-item label="نام کاربری">
                         <a-input
                                 class="text-right"
@@ -65,7 +65,7 @@
                         />
                     </a-form-item>
                 </div>
-                <div class="col-sm">
+                <div class="col-md">
                     <a-form-item label="کلمه عبور">
                         <a-input
                                 class="text-right"
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm">
+                <div class="col-md">
                     <a-form-item label="رشته">
                         <a-select
                                 v-decorator="['field',{ rules: [
