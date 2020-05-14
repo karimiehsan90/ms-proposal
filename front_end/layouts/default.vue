@@ -56,6 +56,7 @@
       logout () {
         Cookie.remove('auth')
         this.$store.commit('setAuth', null)
+        this.$router.push('/')
       }
     },
     mounted() {
