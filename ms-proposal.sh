@@ -11,20 +11,43 @@ unit-test() {
 build() {
   mvn clean package -DskipTests
 
-  for module in "${modules[@]}"; do
+  for module in "${JAVA_MODULES[@]}"; do
     docker build \
       -t "ms-proposal/${module}" \
       -f "${module}/target/${module}/Dockerfile" \
       "${module}/target/${module}/"
   done
+
+  for module in "${OTHER_LANGUAGES_MODULES[@]}"; do
+    docker build \
+      -t "ms-proposal/${module}" \
+      -f "${module}/Dockerfile" \
+      "${module}"
+  done
+}
+
+_make-previous-docker-compose-down() {
+  ls docker-compose.yml && docker-compose down
 }
 
 prepare-env() {
-  echo "Not implemented"
+  mkdir -p "$HOME/ms-proposal"
+  DIRECTORY=$PWD
+  cd "$HOME/ms-proposal"
+  _make-previous-docker-compose-down || true
+  cp "${DIRECTORY}/docker-compose.yml" .
+  docker-compose up -d
 }
 
 acceptance-test() {
-  echo "Not implemented"
+  docker run -i \
+    --rm \
+    --link mongo:mongo \
+    --link web-proxy:web-proxy \
+    -e ACCEPTANCE_TEST_MONGO_HOST=mongo \
+    -e ACCEPTANCE_TEST_APP_HOST=web-proxy \
+    --net msproposal_default \
+    ms-proposal/acceptance-test
 }
 
 parse-args() {
