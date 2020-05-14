@@ -1,0 +1,13 @@
+@charset "utf-8";
+@font-face{
+  font-family:"iranSans" ;
+  src : url("../__fonts/IRANSansWeb_Medium2.ttf");
+}
+@font-face{
+  font-family:"iranSansL" ;
+  src : url("../__fonts/IRANSansWeb_Light.ttf");
+}
+*{
+  font-family: "iranSans" , Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", "serif";
+}
+@supports ((position:-webkit-sticky) or (position:sticky)){.sticky-bot{position:-webkit-sticky;position:sticky;bottom:0;z-index:10}}
