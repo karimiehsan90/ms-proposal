@@ -1,10 +1,8 @@
 <template>
     <div class="container">
-      u see this only if you login .
+      THIS IS SAFE PAGE !
       <p>your token is : {{token}}</p>
-      <NuxtLink to="/">
-        Back home
-      </NuxtLink>
+      <p>your role is  : {{role}}</p>
     </div>
 </template>
 
@@ -15,12 +13,14 @@
         middleware:"auth",
         data(){
             return{
-                token:'NO_TOKEN'
+                token:'NO_TOKEN',
+                role:'NO_ROLE'
             }
         },
         mounted() {
            // this.token = Cookie.get('auth')
             this.token = this.$store.state.auth.accessToken
+            this.role = this.$store.state.auth.role
         }
     }
 </script>

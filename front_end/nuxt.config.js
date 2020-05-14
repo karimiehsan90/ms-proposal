@@ -5,7 +5,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'سامانه پروپوزال دانشجویی',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -36,7 +36,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    //'@/plugins/antd-ui' ,
+    '@/plugins/antd-ui' ,
     {src: '~plugins/datePicker.js', ssr: false},
   ],
   /*
@@ -54,14 +54,14 @@ export default {
   ** Build configuration
   */
   build: {
-    babel: {
-      plugins: [
-        [
-          "import",
-          { libraryName: 'ant-design-vue', style: 'css' }
-        ]
-      ]
-    },
+    // babel: {
+    //   plugins: [
+    //     [
+    //       "import",
+    //       { libraryName: 'ant-design-vue', style: 'css' }
+    //     ]
+    //   ]
+    // },
     /*
     ** Run ESLint on save
     */
