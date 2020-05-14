@@ -1,107 +1,72 @@
 <template>
-  <div class="container">
-    <br>
-    <a-form layout="inline" :form="form" class="clearfix  mt-5 mb-2" @submit="handleSubmit">
-      <a-form-item>
-        <a-input
-          v-decorator="[
-          'userName',
-          { rules: [{ required: true, message: 'لطفا نام کاربری خود را وارد کنید ' }] },
-        ]"
-          placeholder="نام کاربری"
-        >
-          <a-icon slot="prefix" type="user" style="color:rgba(0,0,0,.25)" />
-        </a-input>
-      </a-form-item>
-      <a-form-item >
-        <a-input
-          v-decorator="[
-          'password',
-          { rules: [{ required: true, message: 'لطفا پسورد خود را وارد کنید ' }] },
-        ]"
-          type="password"
-          placeholder="پسورد"
-        >
-          <a-icon slot="prefix" type="lock" style="color:rgba(0,0,0,.25)" />
-        </a-input>
-      </a-form-item>
-      <a-form-item>
-        <a-button type="primary" html-type="submit" >
-          وارد شوید
-        </a-button>
-      </a-form-item>
-    </a-form>
-    <div :class="status?'text-success':'text-danger'">
-      {{test}}
+  <div>
+    <div v-if="!$store.state.auth">
+      <div class="overlay"><div class="mask"></div></div>
+        <div class="text-center justify-content-center w-50 p-5" style="height: 100vh">
+          <h3 class="text-white m-5 p-5" >!
+             به سامانه پروپوزال دانشجویی خوش آمدید
+          </h3>
+          <br><br>
+          <nuxt-link to="/login">
+            <button class="btn btn-block btn-warning text-center text-white w-75 mx-auto" >! وارد شوید </button>
+          </nuxt-link>
+      </div>
+    </div>
+    <div v-else class="container">
+      <p>your panel</p>
+      <button class="btn btn-info" @click="logout">logout</button>
+      <br>
+      <nuxt-link to="/onlyForUsers">
+        see this karim.
+      </nuxt-link>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import Button from 'ant-design-vue/lib/button'
-import Form from 'ant-design-vue/lib/form'
-import Input from 'ant-design-vue/lib/input'
-import Icon from 'ant-design-vue/lib/icon'
+
+const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   components: {
-    Logo , AButton: Button , AForm: Form , AFormItem: Form.Item , AInput: Input , AIcon: Icon
   },
     data(){
       return{
-          form: this.$form.createForm(this, { name: 'login' }),
-          test:'',
-          status:false,
+
       }
     },
     mounted() {
-      $(document).ready(function () {
-         console.log("Bia Karim inam az Jquery! :) \nvali ba axios request mizanimaaa! hanooz addesh nakrdm ==> w8 yekam :)")
-      })
+
 
     },
 
     methods:{
-        handleSubmit(e) {
-            e.preventDefault();
-            this.test = ''
-            this.form.validateFields((err, values) => {
-                if (!err) {
-                     // console.log('Karim Khan! Make Request to server pls ' , values.password);
-                     let pass = values.password
-                     let us = values.userName
-                    this.$axios
-                        .post('http://localhost:6060/auth/login', null, { params: {
-                                username : us,
-                                password :pass
-                            }})
-                        .then(response => {
-                            this.status = response.data.success
-                            if (!response.data.success)
-                              this.test = response.data.error
-                            else
-                                this.test = 'هوراااااا'
-                            setTimeout(function(){ this.test = '' }, 3000);
-                        })
-                        .catch(error => {
-                            console.log(error)
-                        })
-                }
-            });
-        },
+        logout () {
+            Cookie.remove('auth')
+            this.$store.commit('setAuth', null)
+        }
     }
 }
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+.overlay {
+  background: url('/images/bg.jpg') no-repeat center center fixed;
+  background-color: rgba(0,0,0,0.5);
+  z-index: -1;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  position: fixed;
+  top: 0; bottom: 0; left: 0; right: 0;
+  }
+  .mask{
+    background-color: rgba(0,0,0,0.4);
+    z-index: 0;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+  }
 
 
 </style>
