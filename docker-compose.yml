@@ -1,0 +1,35 @@
+---
+version: '3'
+services:
+  mongo:
+    container_name: mongo
+    image: m.docker-registry.ir/mongo:3.6.3
+    environment:
+      LC_ALL: C.UTF-8
+  auth:
+    image: ms-proposal/auth
+    environment:
+      AUTH_MONGO_HOST: mongo
+    depends_on:
+      - mongo
+  login-register:
+    image: ms-proposal/login-register
+    environment:
+      LOGIN_REGISTER_MONGO_HOST: mongo
+      LOGIN_REGISTER_AUTH_HOST: auth
+      LOGIN_REGISTER_AUTH_PORT: 8080
+    depends_on:
+      - mongo
+      - auth
+  web-proxy:
+    container_name: web-proxy
+    image: ms-proposal/web-proxy
+    environment:
+      WEB_PROXY_MONGO_HOST: mongo
+      WEB_PROXY_LOGIN_REGISTER_HOST: login-register
+      WEB_PROXY_LOGIN_REGISTER_PORT: 8080
+    depends_on:
+      - mongo
+      - login-register
+    ports:
+      - "8000:8080"
