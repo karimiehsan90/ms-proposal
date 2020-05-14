@@ -20,19 +20,15 @@
             <button class="btn btn-block btn-warning text-white btn-sm" @click="logout" >خروج</button>
           </div>
           <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
-            <a-menu-item key="1" v-if="role==='ADMIN'">
+            <a-menu-item key="1" v-if="role ==='ADMIN'">
               <nuxt-link to="/admin/addUser">
               <a-icon type="user" />
-              <span>اضافه کردن کاربرر</span>
+              <span>اضافه کردن کاربر</span>
               </nuxt-link>
             </a-menu-item>
-            <a-menu-item key="2">
+            <a-menu-item key="2" v-if="role ==='ADMIN'">
               <a-icon type="video-camera" />
-              <span>nav 2</span>
-            </a-menu-item>
-            <a-menu-item key="3">
-              <a-icon type="upload" />
-              <span>nav 3</span>
+              <span>لیست کاربران</span>
             </a-menu-item>
           </a-menu>
         </a-layout-sider>
