@@ -33,3 +33,9 @@ services:
       - login-register
     ports:
       - "8000:8080"
+  frontend:
+    image: ms-proposal/front_end
+    depends_on:
+      - web-proxy
+    ports:
+      - "4000:4000"
