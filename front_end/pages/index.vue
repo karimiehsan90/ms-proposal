@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!$store.state.auth">
+    <div>
       <div class="overlay"><div class="mask"></div></div>
         <div class="text-center justify-content-center w-50 p-5" style="height: 100vh">
           <h3 class="text-white m-5 p-5" >!
@@ -12,14 +12,6 @@
           </nuxt-link>
       </div>
     </div>
-    <div v-else class="container">
-      <p>your panel</p>
-      <button class="btn btn-info" @click="logout">logout</button>
-      <br>
-      <nuxt-link to="/onlyForUsers">
-        see this karim.
-      </nuxt-link>
-    </div>
   </div>
 </template>
 
@@ -28,6 +20,7 @@
 const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
+  middleware:'notAuth',
   components: {
   },
     data(){
@@ -49,10 +42,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .overlay {
   background: url('/images/bg.jpg') no-repeat center center fixed;
-  background-color: rgba(0,0,0,0.5);
   z-index: -1;
   -webkit-background-size: cover;
   -moz-background-size: cover;

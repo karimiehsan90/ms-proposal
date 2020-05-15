@@ -4,10 +4,9 @@ Vue.component('date-picker', DatePickerr);
 Vue.use(DatePickerr, {
   name: 'custom-date-picker',
   props: {
-
     format: 'jYYYY/jMM/jDD',
-    editable: true,
-    inputClass: 'form-control my-custom-class-name',
+    editable: false,
+    inputClass: 'form-control border rounded-0 text-right',
     placeholder: '13xx/xx/xx',
     altFormat: 'YYYY-MM-DD',
     color: '#7E1975',
