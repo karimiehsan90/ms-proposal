@@ -28,7 +28,7 @@ public class UserService {
         user.setPassword(hashUtils.hashPassword(userRequestEntity.getPassword()));
         user.setField(userRequestEntity.getField());
         user.setName(userRequestEntity.getName());
-        user.setNationalId(userRequestEntity.getNationalId());
+        user.setIdentificationNumber(userRequestEntity.getIdentificationNumber());
         user.setRole(userRequestEntity.getRole());
         userRepository.save(user);
         return new ActionResult<>(true, "با موفقیت افزوده شد", true);

@@ -13,8 +13,8 @@ public class UserRequestEntity {
     private String username;
     private String password;
     private Role role;
-    @JsonProperty("national_id")
-    private String nationalId;
+    @JsonProperty("id_number")
+    private String identificationNumber;
     private String field;
     private String name;
 }

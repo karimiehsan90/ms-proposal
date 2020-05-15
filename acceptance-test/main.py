@@ -21,7 +21,7 @@ FIRST_STUDENT = {
     'username': 'student',
     'password': 'student',
     'role': 'STUDENT',
-    'national_id': '0123456789',
+    'id_number': '0123456789',
     'field': 'نرم افزار',
 }
 
@@ -30,7 +30,7 @@ SECOND_STUDENT = {
     'username': 'student2',
     'password': 'student2',
     'role': 'STUDENT',
-    'national_id': '0123456789',
+    'id_number': '0123456789',
     'field': 'نرم افزار',
 }
 
@@ -39,7 +39,7 @@ WRONG_STUDENTS = [
         'username': 'student',
         'password': 'student',
         'role': 'STUDENT',
-        'national_id': '0123456789',
+        'id_number': '0123456789',
         'field': 'نرم افزار',
     },
     {
@@ -47,14 +47,14 @@ WRONG_STUDENTS = [
         'username': None,
         'password': 'student',
         'role': 'STUDENT',
-        'national_id': '0123456789',
+        'id_number': '0123456789',
         'field': 'نرم افزار',
     },
     {
         'name': 'دانشجو',
         'username': 'student',
         'role': 'STUDENT',
-        'national_id': '0123456789',
+        'id_number': '0123456789',
         'field': 'نرم افزار',
     },
     {
@@ -62,7 +62,7 @@ WRONG_STUDENTS = [
         'username': 'student',
         'password': 'student',
         'role': 'WRONG_ROLE',
-        'national_id': '0123456789',
+        'id_number': '0123456789',
         'field': 'نرم افزار',
     },
     {
@@ -77,7 +77,7 @@ WRONG_STUDENTS = [
         'username': 'student',
         'password': 'student',
         'role': 'STUDENT',
-        'national_id': '0123456789',
+        'id_number': '0123456789',
         'field': 'نرم افزار',
     }
 ]
