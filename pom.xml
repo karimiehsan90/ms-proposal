@@ -12,10 +12,11 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>auth</module>
     <module>common</module>
+    <module>auth</module>
     <module>login-register</module>
-      <module>web-proxy</module>
+    <module>web-proxy</module>
+    <module>proposal</module>
   </modules>
 
   <properties>

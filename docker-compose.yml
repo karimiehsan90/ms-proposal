@@ -7,7 +7,7 @@ services:
     environment:
       LC_ALL: C.UTF-8
   auth:
-    image: ms-proposal/auth
+    image: ${IMAGE_PREFIX}/ms-proposal/auth
     environment:
       AUTH_MONGO_HOST: mongo
     depends_on:
@@ -21,6 +21,15 @@ services:
     depends_on:
       - mongo
       - auth
+  proposal:
+    image: ${IMAGE_PREFIX}/ms-proposal/proposal
+    environment:
+      PROPOSAL_MONGO_HOST: mongo
+      PROPOSAL_AUTH_HOST: auth
+      PROPOSAL_AUTH_PORT: 8080
+    depends_on:
+      - mongo
+      - auth
   web-proxy:
     container_name: ${IMAGE_PREFIX}-web-proxy
     image: ${IMAGE_PREFIX}/ms-proposal/web-proxy
@@ -28,9 +37,12 @@ services:
       WEB_PROXY_MONGO_HOST: mongo
       WEB_PROXY_LOGIN_REGISTER_HOST: login-register
       WEB_PROXY_LOGIN_REGISTER_PORT: 8080
+      WEB_PROXY_PROPOSAL_HOST: proposal
+      WEB_PROXY_PROPOSAL_PORT: 8080
     depends_on:
       - mongo
       - login-register
+      - proposal
     ports:
       - "${BACKEND_PORT}:8080"
   frontend:

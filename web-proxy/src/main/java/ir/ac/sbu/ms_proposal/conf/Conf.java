@@ -14,4 +14,5 @@ import org.springframework.stereotype.Component;
 @Setter
 public class Conf {
     private LoginRegister loginRegister;
+    private Proposal proposal;
 }

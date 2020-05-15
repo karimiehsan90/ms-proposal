@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Auth {
+public class Proposal {
     private String host;
     private int port;
 }
