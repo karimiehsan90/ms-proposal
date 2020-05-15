@@ -1,10 +1,12 @@
 package ir.ac.sbu.ms_proposal.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "users")
 @Getter
@@ -16,4 +18,9 @@ public class User {
     @JsonIgnore
     private String password;
     private Role role;
+    @Field("national_id")
+    @JsonProperty("national_id")
+    private String nationalId;
+    private String field;
+    private String name;
 }

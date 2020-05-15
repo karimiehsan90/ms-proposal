@@ -17,7 +17,7 @@ public abstract class Request {
         HttpPost postRequest = new HttpPost(getUrl());
         try {
             postRequest.setEntity(getBody());
-            postRequest.setHeader("Accept-Encoding", "utf-8");
+            setHeaders(postRequest);
             try (CloseableHttpClient client = HttpClients.createDefault()) {
                 CloseableHttpResponse response = client.execute(postRequest);
                 InputStream inputStream = response.getEntity().getContent();
@@ -41,6 +41,10 @@ public abstract class Request {
             }
             return responseBuilder.toString();
         }
+    }
+
+    protected void setHeaders(HttpPost postRequest) {
+        postRequest.setHeader("Accept-Encoding", "utf-8");
     }
 
     public abstract String getUrl();
