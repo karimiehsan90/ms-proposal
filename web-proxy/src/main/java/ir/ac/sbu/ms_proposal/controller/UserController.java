@@ -4,10 +4,7 @@ import ir.ac.sbu.ms_proposal.common.entity.request.UserRequestEntity;
 import ir.ac.sbu.ms_proposal.common.response.ActionResult;
 import ir.ac.sbu.ms_proposal.conf.Conf;
 import ir.ac.sbu.ms_proposal.service.UserService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -20,6 +17,7 @@ public class UserController {
         this.conf = conf;
     }
 
+    @CrossOrigin
     @RequestMapping("/add")
     public ActionResult<Boolean> addUser(@RequestBody UserRequestEntity user,
                                          @RequestHeader("ms-proposal-token") String token) {
