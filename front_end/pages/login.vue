@@ -74,7 +74,6 @@
             $(document).ready(function () {
                 console.log("Bia Karim inam az Jquery! :)")
             })
-
         },
 
         methods:{
@@ -87,7 +86,7 @@
                         let pass = values.password
                         let us = values.userName
                         this.$axios
-                            .post('http://localhost:6060/auth/login', null, { params: {
+                            .post(this.$store.state.env.baseUrl+'/auth/login', null, { params: {
                                     username : us,
                                     password :pass
                                 }})

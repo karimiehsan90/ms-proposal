@@ -39,3 +39,5 @@ services:
       - web-proxy
     ports:
       - "4000:4000"
+    environment:
+      BACKEND_BASE_URL: http://194.5.188.112:8000
