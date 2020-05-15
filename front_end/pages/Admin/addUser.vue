@@ -38,6 +38,7 @@
                 <div class="col-md">
                     <a-form-item label="نقش">
                         <a-select
+                                class="mysel"
                                 v-decorator="['role',{ rules: [
                                 { required: true, message: 'لطفا نقش را انتخاب کنید' }] },
                                  ]"
@@ -61,19 +62,20 @@
                     <a-form-item label="نام کاربری">
                         <a-input
                                 class="text-right"
-                                v-decorator="['username', { rules: [{ required: true, message: 'لطفا نام را وارد کنید' }] }]"
+                                v-decorator="['username', { rules: [{ required: true, message: 'لطفا نام کاربری را وارد کنید' }] }]"
                         />
                     </a-form-item>
                 </div>
                 <div class="col-md">
                     <a-form-item label="کلمه عبور">
-                        <a-input
+                        <a-input-password
                                 class="text-right"
                                 v-decorator="['password', { rules: [
-                                { required: true, message: 'لطفا نام خانوادگی را وارد کنید' },
+                                { required: true, message: 'لطفا کلمه عبور را وارد کنید' },
                                 { min: 4, message: 'لکلممه عبور حداقل 4 کاراکتر باید باشد' }
                                 ] }]"
                         />
+
                     </a-form-item>
                 </div>
             </div>
@@ -81,6 +83,7 @@
                 <div class="col-md">
                     <a-form-item label="رشته">
                         <a-select
+                                class="mysel"
                                 v-decorator="['field',{ rules: [
                                 { required: true, message: 'لطفا رشته را انتخاب کنید' }] },
                                  ]"
@@ -97,9 +100,6 @@
                             </a-select-option>
                             <a-select-option value="4">
                                 معماری
-                            </a-select-option>
-                            <a-select-option value="5">
-                                سخت افزار
                             </a-select-option>
                         </a-select>
                     </a-form-item>
@@ -147,18 +147,18 @@
 </script>
 
 <style>
-    .ant-select-selection__rendered , .ant-select-search__field , .ant-select-selection-selected-value {
+    .mysel .ant-select-selection__rendered , .ant-select-search__field , .ant-select-selection-selected-value {
         transform: rotateY(180deg);
     }
-    .ant-select-selection__placeholder{
+    .mysel .ant-select-selection__placeholder{
         transform: rotateY(180deg);
         text-align: right;
         padding-right: 15px;
     }
-    .ant-select-search__field{
+    .mysel .ant-select-search__field{
         padding-right: 15px ;
     }
-    .ant-select-dropdown-menu{
+    .mysel .ant-select-dropdown-menu{
         text-align: right;
     }
 </style>

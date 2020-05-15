@@ -26,9 +26,17 @@
               <span>اضافه کردن کاربر</span>
               </nuxt-link>
             </a-menu-item>
+            <a-menu-item key="1" v-if="role ==='STUDENT'">
+              <nuxt-link to="/Student/newProposal">
+                <a-icon type="user" />
+                <span>ثبت پروپوزال</span>
+              </nuxt-link>
+            </a-menu-item>
             <a-menu-item key="2" v-if="role ==='ADMIN'">
+              <nuxt-link to="/admin/userList">
               <a-icon type="video-camera" />
               <span>لیست کاربران</span>
+              </nuxt-link>
             </a-menu-item>
           </a-menu>
         </a-layout-sider>
@@ -45,7 +53,7 @@
     data() {
       return {
         collapsed: false,
-        role:'NONE'
+        // role:'NONE'
       };
     },
     methods:{
@@ -56,9 +64,14 @@
       }
     },
     mounted() {
-      if (this.$store.state.auth)
-        this.role = this.$store.state.auth.role
-    }
+      // if (this.$store.state.auth)
+      //   this.role = this.$store.state.auth.role
+    },
+    computed:{
+      role(){
+        return  this.$store.state.auth?this.$store.state.auth.role:'NONE'
+      }
+    },
   }
 </script>
 <style>

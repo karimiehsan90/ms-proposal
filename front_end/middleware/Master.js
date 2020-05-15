@@ -3,10 +3,10 @@ export default function ({ store, redirect }) {
         return redirect('/login')
     }
     if (store.state.auth.role ==="ADMIN"){
-        return redirect('/admin/addUser')
+        return redirect('/Admin/addUser')
     }
     else if (store.state.auth.role ==="STUDENT"){
-        return redirect('/safePage')
+        return redirect('/Student/newProposal')
     }
     else if (store.state.auth.role ==="MANAGER"){
         return redirect('/safePage')
