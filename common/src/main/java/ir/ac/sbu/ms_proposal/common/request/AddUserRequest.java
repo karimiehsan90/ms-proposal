@@ -37,7 +37,7 @@ public class AddUserRequest extends Request {
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("name", this.user.getName());
-            jsonObject.put("national_id", this.user.getNationalId());
+            jsonObject.put("id_number", this.user.getIdentificationNumber());
             jsonObject.put("username", this.user.getUsername());
             jsonObject.put("password", this.user.getPassword());
             jsonObject.put("role", this.user.getRole());

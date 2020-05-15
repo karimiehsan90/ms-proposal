@@ -30,7 +30,7 @@ public class UserService {
         if (user.getName() == null || user.getName().isEmpty()) {
             return false;
         }
-        if (user.getNationalId() == null || !user.getNationalId().matches("^[0-9]{10}$")) {
+        if (user.getIdentificationNumber() == null || !user.getIdentificationNumber().matches("^[0-9]+$")) {
             return false;
         }
         if (user.getUsername() == null || !user.getUsername().matches("^[a-z]([a-z0-9]|_[a-z0-9]|.[a-z0-9])+$")) {

@@ -19,8 +19,8 @@ public class User {
     private String password;
     private Role role;
     @Field("national_id")
-    @JsonProperty("national_id")
-    private String nationalId;
+    @JsonProperty("id_number")
+    private String identificationNumber;
     private String field;
     private String name;
 }
