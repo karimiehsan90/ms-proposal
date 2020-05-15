@@ -77,6 +77,12 @@
         },
 
         methods:{
+          openNotificationWithIcon(type , msg , desc) {
+            this.$notification[type]({
+              message: msg,
+              description: desc,
+            });
+          },
             handleSubmit(e) {
                 e.preventDefault();
                 this.test = ''
@@ -93,7 +99,7 @@
                             .then(response => {
                                 this.status = response.data.success
                                 if (!response.data.success)
-                                    this.test = response.data.error
+                                  this.openNotificationWithIcon('error' , response.data.error , '')
                                 else{
                                     const auth = {
                                         accessToken: response.data.data.token,
@@ -107,6 +113,7 @@
                             })
                             .catch(error => {
                                 console.log(error)
+                                this.openNotificationWithIcon('info' , 'request to server Error' , error)
                             })
                     }
                 });

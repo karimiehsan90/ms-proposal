@@ -22,13 +22,13 @@
             </div>
             <div class="row">
                 <div class="col-md">
-                    <a-form-item label="کد ملی">
+                    <a-form-item label="شماره دانشجویی یا کد پرسنلی">
                         <a-input
                                 class="text-right"
                                 @keypress="pp"
-                                v-decorator="['nationID', { rules:[
-                                { required: true, message: 'لطفا کد ملی را وارد کنید' },
-                                {len:10 , message:'کد ملی عددی 10 رقمی میباشد'}
+                                v-decorator="['pid', { rules:[
+                                { required: true, message: 'لطفا کد پرسنلی را وارد کنید' },
+                                {len:8 , message:'کد پرسنلی عددی 8 رقمی میباشد'}
                                 ]}]"
                         />
                     </a-form-item>
@@ -134,11 +134,51 @@
                     e.preventDefault();
                 }
             },
+            openNotificationWithIcon(type , msg , desc) {
+                this.$notification[type]({
+                    message: msg,
+                    description: desc,
+                });
+            },
             handleSubmit(e) {
                 e.preventDefault();
                 this.form.validateFields((err, values) => {
                     if (!err) {
-                        console.log('Received values of form: ', values);
+                        let pass = values.password
+                        let un = values.username
+                        let name = values.firstName + values.lastName
+                        let pid = values.pid
+                        let role = values.role
+                        let field = values.field
+                        let token = this.$store.state.auth.accessToken
+                        this.$axios
+                            .post(this.$store.state.env.baseUrl+'/user/add',{
+                                username : un,
+                                password :pass,
+                                role :role,
+                                name :name,
+                                field :field,
+                                id_number:pid
+                            } ,
+                                {
+                                    headers: {
+                                        ms_proposal_token:token
+                                    }
+                            })
+                            .then(response => {
+                                this.status = response.data.success
+                                if (!response.data.success)
+                                    this.openNotificationWithIcon('error' , response.data.error , '')
+                                else{
+                                    this.openNotificationWithIcon('success' , ' با موفقیت ثبت شد' + un , '')
+                                    this.from.resetFields();
+                                }
+
+                            })
+                            .catch(error => {
+                                console.log(error)
+                                this.openNotificationWithIcon('info' , 'request to server Error' , error)
+                            })
                     }
                 });
             },
