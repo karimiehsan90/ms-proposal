@@ -46,7 +46,7 @@
                                     :filter-option="filterOption"
                                     @change="handleChange"
                             >
-                                <a-select-option v-for="t in teachers" :value="t.id+'#'+t.group">
+                                <a-select-option v-for="t in teachers" :value="t.id+'#'+t.group" :key="t.id">
                                     {{t.name}}
                                 </a-select-option>
                             </a-select>
@@ -158,7 +158,7 @@
 <script>
     export default {
         name: "newProposal",
-        // middleware:"stdAuth",
+        middleware:"stdAuth",
         data(){
             return{
                 activeKey: ['1','2','3'],
