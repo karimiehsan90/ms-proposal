@@ -141,7 +141,7 @@ def test_login(username, password, expected_result):
 
 def test_add_user(token, obj, expected_result):
     admin_headers = {
-        'ms-proposal-token': token,
+        'ms_proposal_token': token,
     }
     response = requests.post('http://{}:{}/user/add'.format(APP_SERVER_HOST, APP_SERVER_PORT),
                              json=obj, headers=admin_headers)

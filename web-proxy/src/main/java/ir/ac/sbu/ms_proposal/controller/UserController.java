@@ -20,7 +20,7 @@ public class UserController {
     @CrossOrigin
     @RequestMapping("/add")
     public ActionResult<Boolean> addUser(@RequestBody UserRequestEntity user,
-                                         @RequestHeader("ms-proposal-token") String token) {
+                                         @RequestHeader("ms_proposal_token") String token) {
         return service.addUser(user, token, String
                 .format("http://%s:%s/user/add", conf.getLoginRegister().getHost(), conf.getLoginRegister().getPort()));
     }
