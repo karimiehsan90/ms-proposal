@@ -171,7 +171,7 @@
                                     this.openNotificationWithIcon('error' , response.data.error , '')
                                 else{
                                     this.openNotificationWithIcon('success' , ' با موفقیت ثبت شد' + un , '')
-                                    this.from.resetFields();
+                                    this.form.resetFields();
                                 }
 
                             })
