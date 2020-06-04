@@ -2,7 +2,7 @@
 version: '3'
 services:
   mongo:
-    container_name: mongo
+    container_name: ${IMAGE_PREFIX}-mongo
     image: m.docker-registry.ir/mongo:3.6.3
     environment:
       LC_ALL: C.UTF-8
@@ -22,7 +22,7 @@ services:
       - mongo
       - auth
   web-proxy:
-    container_name: web-proxy
+    container_name: ${IMAGE_PREFIX}-web-proxy
     image: ${IMAGE_PREFIX}/ms-proposal/web-proxy
     environment:
       WEB_PROXY_MONGO_HOST: mongo

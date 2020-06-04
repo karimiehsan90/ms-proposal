@@ -60,8 +60,7 @@ prepare-db() {
   fi
   docker run -i \
     --rm \
-    --link mongo:mongo \
-    --link web-proxy:web-proxy \
+    --link "${image_prefix}-mongo:mongo" \
     -e PREPARE_DB_MONGO_HOST=mongo \
     --net "${network}" \
     "${image_prefix}/ms-proposal/prepare-db"
@@ -70,8 +69,7 @@ prepare-db() {
 acceptance-test() {
   docker run -i \
     --rm \
-    --link mongo:mongo \
-    --link web-proxy:web-proxy \
+    --link ci-web-proxy:web-proxy \
     -e ACCEPTANCE_TEST_APP_HOST=web-proxy \
     --net msproposal_default \
     ci/ms-proposal/acceptance-test
