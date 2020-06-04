@@ -13,7 +13,7 @@ services:
     depends_on:
       - mongo
   login-register:
-    image: ms-proposal/login-register
+    image: ${IMAGE_PREFIX}/ms-proposal/login-register
     environment:
       LOGIN_REGISTER_MONGO_HOST: mongo
       LOGIN_REGISTER_AUTH_HOST: auth
@@ -23,7 +23,7 @@ services:
       - auth
   web-proxy:
     container_name: web-proxy
-    image: ms-proposal/web-proxy
+    image: ${IMAGE_PREFIX}/ms-proposal/web-proxy
     environment:
       WEB_PROXY_MONGO_HOST: mongo
       WEB_PROXY_LOGIN_REGISTER_HOST: login-register
@@ -32,12 +32,12 @@ services:
       - mongo
       - login-register
     ports:
-      - "8000:8080"
+      - "${BACKEND_PORT}:8080"
   frontend:
-    image: ms-proposal/front_end
+    image: ${IMAGE_PREFIX}/ms-proposal/front_end
     depends_on:
       - web-proxy
     ports:
-      - "4000:4000"
+      - "${FRONT_PORT}:4000"
     environment:
-      BACKEND_BASE_URL: http://194.5.188.112:8000
+      BACKEND_BASE_URL: http://194.5.188.112:${BACKEND_PORT}
