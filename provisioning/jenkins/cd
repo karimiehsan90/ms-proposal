@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './ms-proposal.sh build ci'
+                sh './ms-proposal.sh build cd'
             }
         }
 
