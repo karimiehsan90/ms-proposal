@@ -20,6 +20,12 @@ pipeline {
             }
         }
 
+        stage('Prepare db') {
+            steps {
+                sh './ms-proposal.sh prepare-db'
+            }
+        }
+
         stage('Acceptance test') {
             steps {
                 sh './ms-proposal.sh acceptance-test'

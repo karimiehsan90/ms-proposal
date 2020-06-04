@@ -1,15 +1,12 @@
-import os
 import hashlib
-import pymongo
-import requests
 import json
-import socket
-import time
 import logging
+import os
+import socket
 
-MONGO_HOST = os.getenv('ACCEPTANCE_TEST_MONGO_HOST', 'localhost')
-MONGO_PORT = os.getenv('ACCEPTANCE_TEST_MONGO_PORT', '27017')
-MONGO_DATABASE = os.getenv('ACCEPTANCE_TEST_MONGO_DATABASE', 'ms-proposal')
+import requests
+import time
+
 APP_SERVER_HOST = os.getenv('ACCEPTANCE_TEST_APP_HOST', 'localhost')
 APP_SERVER_PORT = os.getenv('ACCEPTANCE_TEST_APP_PORT', '8080')
 ADMIN_PASSWORD = 'admin'
@@ -105,31 +102,6 @@ def wait_for_services():
     raise Exception('Timeout to create connection to app. Is web-proxy ready?')
 
 
-def insert_data():
-    client = pymongo.MongoClient("mongodb://{}:{}".format(MONGO_HOST, MONGO_PORT))
-    db = client.get_database(MONGO_DATABASE)
-    users_col = db.get_collection('users')
-    roles_col = db.get_collection('roles')
-
-    user_doc = {
-        'username': 'admin',
-        'password': ADMIN_HASH_PASSWORD,
-        'role': 'ADMIN'
-    }
-
-    roles_docs = [{
-        'name': 'ADMIN',
-        'permissions': [
-            'ADD_USER',
-        ]
-    }
-    ]
-
-    users_col.insert(user_doc)
-    roles_col.insert(roles_docs)
-    logging.info('Admin and roles added to db')
-
-
 def test_login(username, password, expected_result):
     response = requests.post('http://{}:{}/auth/login'.format(APP_SERVER_HOST, APP_SERVER_PORT),
                              data={'username': username, 'password': password})
@@ -152,7 +124,6 @@ def test_add_user(token, obj, expected_result):
 
 def main():
     wait_for_services()
-    insert_data()
     test_login('admin', 'wrong-password', False)
     admin_login_result = test_login('admin', 'admin', True)
     admin_user = admin_login_result['data']

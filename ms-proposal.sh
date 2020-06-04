@@ -39,12 +39,21 @@ prepare-env() {
   docker-compose up -d
 }
 
+prepare-db() {
+  docker run -i \
+    --rm \
+    --link mongo:mongo \
+    --link web-proxy:web-proxy \
+    -e PREPARE_DB_MONGO_HOST=mongo \
+    --net msproposal_default \
+    ms-proposal/prepare-db
+}
+
 acceptance-test() {
   docker run -i \
     --rm \
     --link mongo:mongo \
     --link web-proxy:web-proxy \
-    -e ACCEPTANCE_TEST_MONGO_HOST=mongo \
     -e ACCEPTANCE_TEST_APP_HOST=web-proxy \
     --net msproposal_default \
     ms-proposal/acceptance-test
