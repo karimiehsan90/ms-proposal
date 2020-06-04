@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+        stage('Build') {
+            steps {
+                sh './ms-proposal.sh build ci'
+            }
+        }
+
         stage('Prepare env') {
             steps {
                 sh './ms-proposal.sh prepare-env cd'
