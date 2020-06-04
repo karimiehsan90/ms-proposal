@@ -32,4 +32,17 @@ pipeline {
             }
         }
     }
+
+    post {
+        always {
+            sh "docker system prune -f"
+            sh "touch $HOME/builds"
+        }
+        success {
+            sh "echo success ${env.GIT_BRANCH} >> $HOME/builds"
+        }
+        failure {
+            sh "echo failure ${env.GIT_BRANCH} >> $HOME/builds"
+        }
+    }
 }
