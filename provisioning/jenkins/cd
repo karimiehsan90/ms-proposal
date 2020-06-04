@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Prepare env') {
+            steps {
+                sh './ms-proposal.sh prepare-env cd'
+            }
+        }
+
+        stage('Prepare db') {
+            steps {
+                sh './ms-proposal.sh prepare-db cd'
+            }
+        }
+    }
+}
