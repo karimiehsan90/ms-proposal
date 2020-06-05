@@ -3,7 +3,7 @@
     <div>
       <div class="overlay"><div class="mask"></div></div>
         <div class="text-center justify-content-center w-50 p-5" style="height: 100vh">
-          <h3 class="text-white m-5 p-5" >!
+          <h3 class="text-white m-5 p-5" >
              به سامانه پروپوزال دانشجویی خوش آمدید
           </h3>
           <br><br>
@@ -21,6 +21,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   middleware:'notAuth',
+  layout:'notAuth',
   components: {
   },
     data(){

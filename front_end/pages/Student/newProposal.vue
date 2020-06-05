@@ -1,6 +1,5 @@
 <template>
     <div class="container text-right">
-       <h5 class="text-secondary my-2 mb-4">ثبت پروپوزال</h5>
         <a-form :form="form" :colon="false" @submit="handleSubmit" class="mx-auto text-right">
             <a-collapse v-model="activeKey">
                 <a-collapse-panel key="1" header="مشخصات دانشجو">
@@ -36,11 +35,12 @@
                         <div class="col-md-7 order-md-2">
                         <a-form-item label="نام و نام خانوادگی" extra="میتوانید اسم استاد مورد نظر را تایپ کرده و از لیست انتخاب کنید">
                             <a-select
+                                    dropdownClassName="text-right"
                                     v-decorator="['teacher',{ rules: [
                                         { required: true, message: 'انتخاب استاد اجباری است' }] },
                                         ]"
                                     show-search
-                                    class="mysel text-right"
+                                    class="text-right"
                                     option-filter-prop="children"
                                     style="width: 100%"
                                     :filter-option="filterOption"
@@ -89,7 +89,9 @@
                     <div class="row">
                         <div class="col-md order-md-2">
                             <a-form-item label="کلمات کلیدی" extra="از لیست پیشنهادی ما انتخاب کنید یا برای جدا سازی کلمات خود از . یا کلید اینتر استفاده کنید" required>
-                            <a-select mode="tags" style="width: 100%" class="mysel" :token-separators="['.']" @change="loger"
+                            <a-select
+                                    dropdownClassName="text-right"
+                                    mode="tags" style="width: 100%" :token-separators="['.']" @change="loger"
                                       v-decorator="['words',{ rules: [
                                         { required: true, type:'array', validator:(r,v,c)=>{return v.length>2} , message:'حداقل 3 کلمه کلیدی لازم است' },
                                         ],
@@ -105,7 +107,7 @@
                         <div class="col-md-3 order-md-1">
                             <a-form-item label="نیم سال تحصیلی"  >
                                 <a-select
-                                        class="mysel"
+                                        dropdownClassName="text-right"
                                         v-decorator="['nimSal',{ rules: [
                                         { required: true, message: 'انتخاب اجباری است' }],
                                          initialValue:'1,99/98'},
@@ -163,7 +165,9 @@
             return{
                 activeKey: ['1','2','3'],
                 form: this.$form.createForm(this, { name: 'newProposal' }),
-                teachers:[{name:'teacher' , group: 'نرم افزار' , id:0}],
+                teachers:[{name:'teacher' , group: 'نرم افزار' , id:0},
+                    {name:'t2222' , group: 'نرم افزار' , id:1},
+                    {name:'t3333' , group: 'نرم افزار' , id:2}],
                 words:['BigData' , 'Web' , 'AI'],
                 tgp:'',
                 beginDate:'',
@@ -174,6 +178,7 @@
         },
         mounted(){
             this.activeKey = ['1']
+            this.$store.commit('setPage','ثبت پروپوزال')
         },
         methods:{
             handleSubmit(e) {
@@ -207,7 +212,5 @@
 </script>
 
 <style>
-.ant-select-selection__choice__content{
-    transform: rotateY(180deg)!important;
-}
+
 </style>

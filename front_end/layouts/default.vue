@@ -1,5 +1,5 @@
 <template>
-    <div v-if="$store.state.auth" style="height: 100vh" class="wrapper">
+    <div style="height: 100vh" class="wrapper">
       <a-layout id="components-layout-demo-custom-trigger">
         <a-layout>
           <a-layout-header class="p-0 text-white bg-or">
@@ -9,6 +9,10 @@
                     @click="() => (collapsed = !collapsed)"
             />
           </a-layout-header>
+          <a-breadcrumb class="text-right mx-5 mt-3">
+            <a-breadcrumb-item>{{$store.state.auth.role==='ADMIN'?'ادمین':($store.state.auth.role==='STUDENT'?'دانشجو':'ندیر')}}</a-breadcrumb-item>
+            <a-breadcrumb-item>{{$store.state.page}}</a-breadcrumb-item>
+          </a-breadcrumb>
           <a-layout-content
                   :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' , overflow:'auto' }"
           >
@@ -19,7 +23,7 @@
           <div class="logo" >
             <button class="btn btn-block btn-warning text-white btn-sm" @click="logout" >خروج</button>
           </div>
-          <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
+          <a-menu theme="dark" mode="inline" :selectedKeys="this.$store.state.siderActiveKey">
             <a-menu-item key="1" v-if="role ==='ADMIN'">
               <nuxt-link to="/admin/addUser">
               <a-icon type="user" />
@@ -42,9 +46,6 @@
         </a-layout-sider>
       </a-layout>
     </div>
-  <div v-else>
-    <nuxt />
-  </div>
 </template>
 
 <script>

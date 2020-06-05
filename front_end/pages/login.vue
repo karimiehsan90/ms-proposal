@@ -59,6 +59,7 @@
     const Cookie = process.client ? require('js-cookie') : undefined
     export default {
         middleware:'notAuth',
+        layout:'notAuth',
         components: {
             Logo , AButton: Button , AForm: Form , AFormItem: Form.Item , AInput: Input , AIcon: Icon
         },
@@ -92,7 +93,7 @@
                         let pass = values.password
                         let us = values.userName
                         this.$axios
-                            .post(this.$store.state.env.baseUrl+'/auth/login', null, { params: {
+                            .post('/auth/login', null, { params: {
                                     username : us,
                                     password :pass
                                 }})

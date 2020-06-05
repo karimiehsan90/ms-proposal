@@ -1,6 +1,5 @@
 <template>
-    <div class="container text-right">
-        <h5 class="text-secondary my-2">افزودن کاربر</h5>
+    <div class="container p-sm-4 text-right">
         <a-form :form="form" :colon="false" @submit="handleSubmit" class="w-75 mx-auto text-right">
             <div class="row">
                 <div class="col-md order-md-2">
@@ -38,7 +37,7 @@
                 <div class="col-md">
                     <a-form-item label="نقش">
                         <a-select
-                                class="mysel"
+                                dropdownClassName="text-right"
                                 v-decorator="['role',{ rules: [
                                 { required: true, message: 'لطفا نقش را انتخاب کنید' }] },
                                  ]"
@@ -83,7 +82,7 @@
                 <div class="col-md">
                     <a-form-item label="رشته">
                         <a-select
-                                class="mysel"
+                                dropdownClassName="text-right"
                                 v-decorator="['field',{ rules: [
                                 { required: true, message: 'لطفا رشته را انتخاب کنید' }] },
                                  ]"
@@ -124,6 +123,10 @@
                 form: this.$form.createForm(this, { name: 'addUser' }),
             }
         },
+        mounted(){
+            this.$store.commit('setPage','افزودن کاربر')
+            this.$store.commit('setActiveKey', ['1'])
+        },
         methods:{
             pp(e){
                 console.log(e)
@@ -152,7 +155,7 @@
                         let field = values.field
                         let token = this.$store.state.auth.accessToken
                         this.$axios
-                            .post(this.$store.state.env.baseUrl+'/user/add',{
+                            .post('/user/add',{
                                 username : un,
                                 password :pass,
                                 role :role,
@@ -187,18 +190,5 @@
 </script>
 
 <style>
-    .mysel .ant-select-selection__rendered , .ant-select-search__field , .ant-select-selection-selected-value {
-        transform: rotateY(180deg);
-    }
-    .mysel .ant-select-selection__placeholder{
-        transform: rotateY(180deg);
-        text-align: right;
-        padding-right: 15px;
-    }
-    .mysel .ant-select-search__field{
-        padding-right: 15px ;
-    }
-    .mysel .ant-select-dropdown-menu{
-        text-align: right;
-    }
+
 </style>
