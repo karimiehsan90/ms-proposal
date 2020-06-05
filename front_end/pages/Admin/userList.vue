@@ -1,7 +1,8 @@
 <template>
-    <div class="container-fluid text-right">
-        <h5 class="my-3 mb-5 mr-3 text-secondary">لیست کاربران</h5>
+    <div class="container-fluid">
     <a-table
+            :scroll="{ x: 1500 }"
+            style="overflow: hidden !important;"
             :columns="columns"
             :row-key="record => record.login.uuid"
             :data-source="data"
@@ -11,33 +12,67 @@
             @change="handleTableChange"
     >
         <template slot="name" slot-scope="name"> {{ name.first }} {{ name.last }} </template>
+        <template slot="op" >
+            <a-button shape="circle" icon="edit" @click="$router.push('/admin/addUser')"></a-button>
+            <a-popconfirm
+                        placement="left"
+                        title="از حذف کاربر مطمینید ؟"
+                        ok-text="تایید"
+                        cancel-text="انصراف">
+                    <a-button shape="circle" icon="delete" />
+            </a-popconfirm>
+        </template>
     </a-table>
     </div>
 </template>
 <script>
     const columns = [
         {
-            title: 'name',
+            title: 'نام کاربری',
             dataIndex: 'name',
             sorter: true,
             width: '20%',
             scopedSlots: {
                 customRender: 'name',
             },
+            align:'center'
         },
         {
-            title: 'Gender',
+            title: 'جنسیت',
             dataIndex: 'gender',
             filters: [
                 { text: 'Male', value: 'male' },
                 { text: 'Female', value: 'female' },
             ],
-            width: '20%',
+            width: '10%',
+            align:'center'
         },
         {
-            title: 'Email',
+            title: 'ایمیل',
             dataIndex: 'email',
+            align:'center'
         },
+        {
+            title: 'شماره شناسایی',
+            dataIndex: 'x',
+            width: '10%',
+            align:'center'
+        },
+        {
+            title: 'تلفن',
+            dataIndex: 'y',
+            width: '10%',
+            align:'center'
+        },
+        {title: 'عملیات',
+            dataIndex: 'operation',
+            width: '15%',
+            align:'center',
+            scopedSlots: {
+                customRender: 'op',
+            },
+            fixed: 'right'
+        }
     ];
 
     export default {
@@ -57,6 +92,8 @@
             };
         },
         mounted() {
+            this.$store.commit('setPage','لیست کاربران')
+            this.$store.commit('setActiveKey', ['2'])
             this.fetch({
                 results: 5,
                 page: 1,

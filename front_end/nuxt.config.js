@@ -48,8 +48,15 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    ['@nuxtjs/axios', { proxy: true }]
+    ['@nuxtjs/axios']
   ],
+  axios: {
+    baseURL: process.env.BACKEND_BASE_URL || 'http://localhost:6060',
+    common: {
+      'Accept': 'application/json, text/plain, */*'
+    },
+      // https:true
+  },
   /*
   ** Build configuration
   */
