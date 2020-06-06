@@ -40,4 +40,4 @@ services:
     ports:
       - "${FRONT_PORT}:4000"
     environment:
-      BACKEND_BASE_URL: http://194.5.188.112:${BACKEND_PORT}
+      BACKEND_BASE_URL: "http://${BACKEND_HOST}:${BACKEND_PORT}"
