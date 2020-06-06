@@ -20,7 +20,7 @@ export const mutations = {
 }
 export const actions = {
   nuxtServerInit ({ commit }, { req }) {
-      console.log('index.vue: '+process.env.BACKEND_BASE_URL)
+      // console.log('index.vue: '+process.env.BACKEND_BASE_URL)
     let auth = null
     if (req.headers.cookie) {
       const parsed = cookieparser.parse(req.headers.cookie)
