@@ -51,7 +51,7 @@ export default {
     ['@nuxtjs/axios']
   ],
   axios: {
-    baseURL: process.env.BACKEND_BASE_URL || 'http://localhost:6060',
+    baseURL: process.env.BACKEND_BASE_URL || 'http://194.5.188.112:8000',
     common: {
       'Accept': 'application/json, text/plain, */*'
     },

@@ -30,7 +30,7 @@ export default {
       }
     },
     mounted() {
-      console.log('index.vue: '+process.env.BACKEND_BASE_URL)
+      // console.log('index.vue: '+ process.env.BACKEND_BASE_URL)
     },
 
     methods:{
