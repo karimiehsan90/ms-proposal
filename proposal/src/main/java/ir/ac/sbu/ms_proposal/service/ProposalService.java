@@ -1,18 +1,24 @@
 package ir.ac.sbu.ms_proposal.service;
 
 import ir.ac.sbu.ms_proposal.common.entity.Proposal;
+import ir.ac.sbu.ms_proposal.common.entity.User;
+import ir.ac.sbu.ms_proposal.common.request.GetUserByTokenRequest;
 import ir.ac.sbu.ms_proposal.common.response.ActionResult;
+import ir.ac.sbu.ms_proposal.common.service.ResponseParser;
 import ir.ac.sbu.ms_proposal.repository.ProposalRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
+import java.util.List;
 
 @Component
 public class ProposalService {
     private final ProposalRepository repository;
+    private final ResponseParser parser;
 
-    public ProposalService(ProposalRepository repository) {
+    public ProposalService(ProposalRepository repository, ResponseParser parser) {
         this.repository = repository;
+        this.parser = parser;
     }
 
     public ActionResult<Boolean> addProposal(String token, Proposal proposal) {
@@ -39,5 +45,12 @@ public class ProposalService {
             return false;
         }
         return proposal.getTeacherIdNumber() != null;
+    }
+
+    public List<Proposal> getTransferredProposals(String token, String url) {
+        String responseJson = new GetUserByTokenRequest(url, token).sendRequest();
+        ActionResult<User> userActionResult = parser.parseResponse(responseJson, User.class);
+        String teacherIdNum = userActionResult.getData().getIdentificationNumber();
+        return repository.getByTeacherIdNumber(teacherIdNum);
     }
 }

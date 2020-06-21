@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/proposal")
 public class ProposalController {
@@ -31,5 +33,14 @@ public class ProposalController {
             return proposalService.addProposal(token, proposal);
         }
         return new ActionResult<>(false, "شما اجازه دسترسی به این مورد را ندارید", false);
+    }
+
+    @RequestMapping("/transferred")
+    public ActionResult<List<Proposal>> getTransferredProposals(@RequestHeader("ms-proposal-token") String token) {
+        if (permissionService.hasPermission(token, Permission.ACCEPT_PROPOSAL, conf.getAuth())) {
+            return new ActionResult<>(true, null, proposalService.getTransferredProposals(token, String
+                .format("http://%s:%s/login/token", conf.getAuth().getHost(), conf.getAuth().getPort())));
+        }
+        return new ActionResult<>(false, "شما اجازه دسترسی به این مورد را ندارید", null);
     }
 }

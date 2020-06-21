@@ -17,7 +17,7 @@ public class UserService {
     public ActionResult<Boolean> addUser(UserRequestEntity user, String token, String url) {
         if (validateUserFields(user)) {
             String addUserResponse = new AddUserRequest(url, user, token).sendRequest();
-            return parser.parseResponse(addUserResponse, ActionResult.class);
+            return parser.parseResponse(addUserResponse, Boolean.class);
         } else {
             return new ActionResult<>(false, "لطفا مقادیر خواسته شده را وارد نمایید", false);
         }

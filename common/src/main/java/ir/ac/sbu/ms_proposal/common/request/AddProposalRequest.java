@@ -9,6 +9,7 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 public class AddProposalRequest extends Request {
     public AddProposalRequest(String url, String token, Proposal proposal) {
@@ -47,7 +48,7 @@ public class AddProposalRequest extends Request {
             jsonObject.put("specific_facilities", proposal.getSpecificFacilities());
             jsonObject.put("teacher_id_num", proposal.getTeacherIdNumber());
             jsonObject.put("term", proposal.getTerm());
-            return new StringEntity(jsonObject.toString());
+            return new StringEntity(jsonObject.toString(), StandardCharsets.UTF_8);
         } catch (JSONException e) {
             throw new UnsupportedEncodingException("Json Exception " + e.getMessage());
         }

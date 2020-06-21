@@ -42,6 +42,7 @@ def insert_data():
 
     if users_count == 0:
         user_doc = {
+            'name': 'ادمین',
             'username': 'admin',
             'password': ADMIN_HASH_PASSWORD,
             'role': 'ADMIN'
@@ -58,6 +59,11 @@ def insert_data():
         'name': 'STUDENT',
         'permissions': [
             'ADD_PROPOSAL',
+        ]
+    }, {
+        'name': 'TEACHER',
+        'permissions': [
+            'ACCEPT_PROPOSAL',
         ]
     },
     ]

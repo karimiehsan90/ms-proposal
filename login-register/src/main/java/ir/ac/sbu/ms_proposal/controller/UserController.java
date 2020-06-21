@@ -7,6 +7,8 @@ import ir.ac.sbu.ms_proposal.common.service.PermissionService;
 import ir.ac.sbu.ms_proposal.conf.Conf;
 import ir.ac.sbu.ms_proposal.service.AuthService;
 import ir.ac.sbu.ms_proposal.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final AuthService authService;
     private final UserService userService;
     private final PermissionService permissionService;
@@ -31,6 +34,7 @@ public class UserController {
     @RequestMapping("/add")
     public ActionResult<Boolean> addUser(@RequestBody UserRequestEntity user,
                                           @RequestHeader("ms-proposal-token") String token) {
+        logger.warn(user.getName());
         if (permissionService.hasPermission(token, Permission.ADD_USER, conf.getAuth())) {
             return userService.addUser(user, token, String
                 .format("http://%s:%s/user/add", conf.getAuth().getHost(), conf.getAuth().getPort()));

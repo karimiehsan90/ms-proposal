@@ -18,7 +18,7 @@ public class PermissionService {
         String hasPermissionResponse = new PermissionRequest(String
                 .format("http://%s:%s/permission/get", auth.getHost(), auth.getPort()),
                 permission, token).sendRequest();
-        ActionResult<Boolean> hasPermissionResult = parser.parseResponse(hasPermissionResponse, ActionResult.class);
+        ActionResult<Boolean> hasPermissionResult = parser.parseResponse(hasPermissionResponse, Boolean.class);
         return hasPermissionResult.getData();
     }
 }
