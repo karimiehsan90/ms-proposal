@@ -27,8 +27,32 @@ SECOND_STUDENT = {
     'username': 'student2',
     'password': 'student2',
     'role': 'STUDENT',
-    'id_number': '0123456789',
+    'id_number': '0123456788',
     'field': 'نرم افزار',
+}
+
+FIRST_TEACHER = {
+    'name': 'استاد',
+    'username': 'teacher',
+    'password': 'teacher',
+    'role': 'TEACHER',
+    'id_number': '1234567890',
+    'field': 'نرم افزار',
+}
+
+PROPOSAL = {
+    'title': 'پروپوزال',
+    'passed_credits': 20,
+    'description': 'توضیحات',
+    'keywords': [
+        'پروپوزال',
+        'ارشد',
+        'وب',
+        'نرم افزار',
+    ],
+    'specific_facilities': '',
+    'teacher_id_num': FIRST_TEACHER['id_number'],
+    'term': 'نیمسال دوم ۹۸-۹۹',
 }
 
 WRONG_STUDENTS = [
@@ -122,6 +146,17 @@ def test_add_user(token, obj, expected_result):
     logging.info('add-user {} for user {}'.format('succeed' if expected_result else 'failed', obj['username']))
 
 
+def test_add_proposal(token, obj, expected_result, username):
+    student_headers = {
+        'ms_proposal_token': token,
+    }
+    response = requests.post('http://{}:{}/proposal/add'.format(APP_SERVER_HOST, APP_SERVER_PORT),
+                             json=obj, headers=student_headers)
+    response_dict = _get_dict_from_response(response)
+    assert response_dict.get('success', False) is expected_result
+    logging.info('add-proposal {} for user {}'.format('succeed' if expected_result else 'failed', username))
+
+
 def main():
     wait_for_services()
     test_login('admin', 'wrong-password', False)
@@ -136,8 +171,10 @@ def main():
     first_student_user = first_student_login_result['data']
     test_add_user(first_student_user['token'], SECOND_STUDENT, False)
     test_add_user(admin_user['token'], SECOND_STUDENT, True)
+    test_add_user(admin_user['token'], FIRST_TEACHER, True)
     second_student_login_result = test_login(SECOND_STUDENT['username'], SECOND_STUDENT['password'], True)
     second_student_user = second_student_login_result['data']
+    test_add_proposal(second_student_user['token'], PROPOSAL, True, second_student_user['username'])
 
 
 main()

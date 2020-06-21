@@ -54,7 +54,12 @@ def insert_data():
         'permissions': [
             'ADD_USER',
         ]
-    }
+    }, {
+        'name': 'STUDENT',
+        'permissions': [
+            'ADD_PROPOSAL',
+        ]
+    },
     ]
 
     roles_col.insert(roles_docs)

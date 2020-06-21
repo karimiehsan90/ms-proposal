@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Configuration
-@ConfigurationProperties(prefix = "login-register")
+@ConfigurationProperties(prefix = "proposal")
 @Component
 @Getter
 @Setter

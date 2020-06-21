@@ -1,9 +1,9 @@
 package ir.ac.sbu.ms_proposal.controller;
 
 import ir.ac.sbu.ms_proposal.common.entity.Permission;
-import ir.ac.sbu.ms_proposal.common.entity.User;
 import ir.ac.sbu.ms_proposal.common.entity.request.UserRequestEntity;
 import ir.ac.sbu.ms_proposal.common.response.ActionResult;
+import ir.ac.sbu.ms_proposal.common.service.PermissionService;
 import ir.ac.sbu.ms_proposal.conf.Conf;
 import ir.ac.sbu.ms_proposal.service.AuthService;
 import ir.ac.sbu.ms_proposal.service.UserService;
@@ -17,18 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final AuthService authService;
     private final UserService userService;
+    private final PermissionService permissionService;
     private final Conf conf;
 
-    public UserController(AuthService authService, UserService userService, Conf conf) {
+    public UserController(AuthService authService, UserService userService,
+                          PermissionService permissionService, Conf conf) {
         this.authService = authService;
         this.userService = userService;
+        this.permissionService = permissionService;
         this.conf = conf;
     }
 
     @RequestMapping("/add")
-    private ActionResult<Boolean> addUser(@RequestBody UserRequestEntity user,
+    public ActionResult<Boolean> addUser(@RequestBody UserRequestEntity user,
                                           @RequestHeader("ms-proposal-token") String token) {
-        if (authService.hasPermission(token, Permission.ADD_USER)) {
+        if (permissionService.hasPermission(token, Permission.ADD_USER, conf.getAuth())) {
             return userService.addUser(user, token, String
                 .format("http://%s:%s/user/add", conf.getAuth().getHost(), conf.getAuth().getPort()));
         }
