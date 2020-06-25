@@ -6,6 +6,7 @@ import ir.ac.sbu.ms_proposal.common.response.ActionResult;
 import ir.ac.sbu.ms_proposal.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -32,5 +33,10 @@ public class UserService {
         user.setRole(userRequestEntity.getRole());
         userRepository.save(user);
         return new ActionResult<>(true, "با موفقیت افزوده شد", true);
+    }
+
+    public ActionResult<List<User>> getUsers(){
+        List<User> users = userRepository.findAll();
+        return new ActionResult<>(true, "", users);
     }
 }

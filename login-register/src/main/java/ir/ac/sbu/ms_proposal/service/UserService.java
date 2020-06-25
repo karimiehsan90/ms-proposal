@@ -1,10 +1,14 @@
 package ir.ac.sbu.ms_proposal.service;
 
+import ir.ac.sbu.ms_proposal.common.entity.User;
 import ir.ac.sbu.ms_proposal.common.entity.request.UserRequestEntity;
 import ir.ac.sbu.ms_proposal.common.request.AddUserRequest;
+import ir.ac.sbu.ms_proposal.common.request.GetUsersRequest;
 import ir.ac.sbu.ms_proposal.common.response.ActionResult;
 import ir.ac.sbu.ms_proposal.common.service.ResponseParser;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class UserService {
@@ -21,6 +25,12 @@ public class UserService {
         } else {
             return new ActionResult<>(false, "لطفا مقادیر خواسته شده را وارد نمایید", false);
         }
+    }
+
+    public ActionResult<List<User>> getUsers(String url){
+        String getUsersResponse = new GetUsersRequest(url).sendRequest();
+        return parser.parseListResponse(getUsersResponse, User.class);
+
     }
 
     private boolean validateUserFields(UserRequestEntity user) {

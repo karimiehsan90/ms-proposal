@@ -1,6 +1,7 @@
 package ir.ac.sbu.ms_proposal.controller;
 
 import ir.ac.sbu.ms_proposal.common.entity.Permission;
+import ir.ac.sbu.ms_proposal.common.entity.User;
 import ir.ac.sbu.ms_proposal.common.entity.request.UserRequestEntity;
 import ir.ac.sbu.ms_proposal.common.response.ActionResult;
 import ir.ac.sbu.ms_proposal.common.service.PermissionService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -41,4 +44,12 @@ public class UserController {
         }
         return new ActionResult<>(false, "شما اجازه دسترسی به این مورد را ندارید", false);
     }
+
+    @RequestMapping("/get")
+    public ActionResult<List<User>> getUsers() {
+
+            return userService.getUsers(String.format("http://%s:%s/user/get",
+                                                        conf.getAuth().getHost(), conf.getAuth().getPort()));
+    }
+
 }
