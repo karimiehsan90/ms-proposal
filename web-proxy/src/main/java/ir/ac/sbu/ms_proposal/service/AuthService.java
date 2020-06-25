@@ -16,6 +16,6 @@ public class AuthService {
 
     public ActionResult<User> login(String username, String password, String url) {
         String responseString = new LoginRequest(username, password, url).sendRequest();
-        return parser.parseResponse(responseString, ActionResult.class);
+        return parser.parseResponse(responseString, User.class);
     }
 }

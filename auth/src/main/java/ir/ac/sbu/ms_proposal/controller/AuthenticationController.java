@@ -35,4 +35,11 @@ public class AuthenticationController {
         }
         return result;
     }
+
+    @RequestMapping("/login/token")
+    public ActionResult<User> getUserByToken(@RequestParam("token") String token) {
+        Optional<User> optionalUser = authenticationService.getByToken(token);
+        return optionalUser.map(user -> new ActionResult<>(true, null, user))
+                .orElseGet(() -> new ActionResult<>(false, "کاربر یافت نشد", null));
+    }
 }

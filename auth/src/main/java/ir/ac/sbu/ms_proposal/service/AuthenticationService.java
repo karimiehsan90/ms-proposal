@@ -19,4 +19,8 @@ public class AuthenticationService {
     public Optional<User> login(String username, String password) {
         return repository.findByUsernameAndPassword(username, hashUtils.hashPassword(password));
     }
+
+    public Optional<User> getByToken(String token) {
+        return repository.getByToken(token);
+    }
 }

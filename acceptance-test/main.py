@@ -157,6 +157,18 @@ def test_add_proposal(token, obj, expected_result, username):
     logging.info('add-proposal {} for user {}'.format('succeed' if expected_result else 'failed', username))
 
 
+def test_get_transferred_proposals(token, expected_result):
+    teacher_headers = {
+        'ms_proposal_token': token,
+    }
+    response = requests.get('http://{}:{}/proposal/transferred'.format(APP_SERVER_HOST, APP_SERVER_PORT),
+                            headers=teacher_headers)
+    response_dict = _get_dict_from_response(response)
+    assert response_dict.get('success', False) is expected_result
+    logging.info('successfully got transferred proposals')
+    return response_dict.get('data')
+
+
 def main():
     wait_for_services()
     test_login('admin', 'wrong-password', False)
@@ -175,6 +187,9 @@ def main():
     second_student_login_result = test_login(SECOND_STUDENT['username'], SECOND_STUDENT['password'], True)
     second_student_user = second_student_login_result['data']
     test_add_proposal(second_student_user['token'], PROPOSAL, True, second_student_user['username'])
+    first_teacher_login_result = test_login(FIRST_TEACHER['username'], FIRST_TEACHER['password'], True)
+    first_teacher_user = first_teacher_login_result['data']
+    transferred_proposals_to_first_teacher = test_get_transferred_proposals(first_teacher_user['token'], True)
 
 
 main()

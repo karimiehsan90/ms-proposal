@@ -4,12 +4,17 @@ import ir.ac.sbu.ms_proposal.common.entity.request.UserRequestEntity;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class AddUserRequest extends Request {
+    private static final Logger logger = LoggerFactory.getLogger(AddUserRequest.class);
     private String url;
     private UserRequestEntity user;
     private String token;
@@ -42,7 +47,8 @@ public class AddUserRequest extends Request {
             jsonObject.put("password", this.user.getPassword());
             jsonObject.put("role", this.user.getRole());
             jsonObject.put("field", this.user.getField());
-            return new StringEntity(jsonObject.toString());
+            logger.warn(jsonObject.toString());
+            return new StringEntity(jsonObject.toString(), StandardCharsets.UTF_8);
         } catch (JSONException e) {
             throw new UnsupportedEncodingException("Json Exception " + e.getMessage());
         }

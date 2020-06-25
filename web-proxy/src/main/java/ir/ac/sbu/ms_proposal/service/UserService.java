@@ -16,6 +16,6 @@ public class UserService {
 
     public ActionResult<Boolean> addUser(UserRequestEntity user, String token, String url) {
         String addUserResponse = new AddUserRequest(url, user, token).sendRequest();
-        return parser.parseResponse(addUserResponse, ActionResult.class);
+        return parser.parseResponse(addUserResponse, Boolean.class);
     }
 }
