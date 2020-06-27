@@ -169,6 +169,21 @@ def test_get_transferred_proposals(token, expected_result):
     return response_dict.get('data')
 
 
+def test_accept_proposal(token, proposal_id, is_accept, expected_result):
+    teacher_headers = {
+        'ms_proposal_token': token,
+    }
+    data = {
+        'proposal_id': proposal_id,
+        'is_accepted': is_accept,
+    }
+    response = requests.post('http://{}:{}/proposal/accept'.format(APP_SERVER_HOST, APP_SERVER_PORT),
+                             headers=teacher_headers, data=data)
+    response_dict = _get_dict_from_response(response)
+    assert response_dict.get('success', False) is expected_result
+    logging.info('successfully {} proposal with id: {}'.format('accepted' if is_accept else 'rejected', proposal_id))
+
+
 def main():
     wait_for_services()
     test_login('admin', 'wrong-password', False)
@@ -190,6 +205,7 @@ def main():
     first_teacher_login_result = test_login(FIRST_TEACHER['username'], FIRST_TEACHER['password'], True)
     first_teacher_user = first_teacher_login_result['data']
     transferred_proposals_to_first_teacher = test_get_transferred_proposals(first_teacher_user['token'], True)
+    test_accept_proposal(first_teacher_user['token'], transferred_proposals_to_first_teacher[0]['id'], True, True)
 
 
 main()

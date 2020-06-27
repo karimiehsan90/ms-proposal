@@ -1,6 +1,7 @@
 package ir.ac.sbu.ms_proposal.service;
 
 import ir.ac.sbu.ms_proposal.common.entity.Proposal;
+import ir.ac.sbu.ms_proposal.common.entity.ProposalState;
 import ir.ac.sbu.ms_proposal.common.entity.User;
 import ir.ac.sbu.ms_proposal.common.request.GetUserByTokenRequest;
 import ir.ac.sbu.ms_proposal.common.response.ActionResult;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProposalService {
@@ -52,5 +54,21 @@ public class ProposalService {
         ActionResult<User> userActionResult = parser.parseResponse(responseJson, User.class);
         String teacherIdNum = userActionResult.getData().getIdentificationNumber();
         return repository.getByTeacherIdNumber(teacherIdNum);
+    }
+
+    public boolean hasPermissionToProposal(String token, String proposalId, String url) {
+        String responseJson = new GetUserByTokenRequest(url, token).sendRequest();
+        ActionResult<User> userActionResult = parser.parseResponse(responseJson, User.class);
+        String teacherIdNum = userActionResult.getData().getIdentificationNumber();
+        return repository.getByTeacherIdNumberAndId(teacherIdNum, proposalId).isPresent();
+    }
+
+    public ActionResult<Boolean> acceptProposal(String proposalId, boolean accept) {
+        Optional<Proposal> proposalOptional = repository.getById(proposalId);
+        proposalOptional.ifPresent(proposal -> {
+            proposal.setProposalState(accept ? ProposalState.TEACHER_ACCEPTED : ProposalState.TEACHER_REJECTED);
+            repository.save(proposal);
+        });
+        return new ActionResult<>(true, null, true);
     }
 }

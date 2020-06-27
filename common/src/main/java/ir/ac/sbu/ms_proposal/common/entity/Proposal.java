@@ -40,4 +40,7 @@ public class Proposal {
     @Field("owner_id")
     @JsonProperty("owner_id")
     private String ownerId;
+    @Field("state")
+    @JsonProperty("state")
+    private ProposalState proposalState = ProposalState.STUDENT_SUBMITTED;
 }

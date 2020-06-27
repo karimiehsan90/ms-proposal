@@ -35,4 +35,14 @@ public class ProposalController {
                         conf.getProposal().getHost(),
                         conf.getProposal().getPort()));
     }
+
+    @RequestMapping("/accept")
+    @CrossOrigin
+    public ActionResult<Boolean> acceptProposal(@RequestHeader("ms_proposal_token") String token,
+                                                @RequestParam("proposal_id") String proposalId,
+                                                @RequestParam("is_accepted") boolean accept) {
+        return service.acceptProposal(String
+                .format("http://%s:%s/proposal/accept", conf.getProposal().getHost(), conf.getProposal().getPort()),
+                proposalId, accept, token);
+    }
 }
