@@ -31,9 +31,27 @@
               </nuxt-link>
             </a-menu-item>
             <a-menu-item key="1" v-if="role ==='STUDENT'">
-              <nuxt-link to="/Student/newProposal">
-                <a-icon type="user" />
+              <nuxt-link to="/Student/newProsal">
+                <a-icon type="form" />
                 <span>ثبت پروپوزال</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="2" v-if="role ==='STUDENT'">
+              <nuxt-link to="/Student/listProposal">
+                <a-icon type="profile" />
+                <span>لیست پروپوزال</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="3" v-if="role ==='STUDENT'">
+              <nuxt-link to="/Student/submitReport">
+                <a-icon type="file-done" />
+                <span>ثبت گزارش</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="4" v-if="role ==='STUDENT'">
+              <nuxt-link to="/Student/listReport">
+                <a-icon type="profile" />
+                <span>لیست گزارش</span>
               </nuxt-link>
             </a-menu-item>
             <a-menu-item key="2" v-if="role ==='ADMIN'">

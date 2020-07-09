@@ -179,17 +179,24 @@
         mounted(){
             this.activeKey = ['1']
             this.$store.commit('setPage','ثبت پروپوزال')
+            this.$store.commit('setActiveKey',['1'])
         },
         methods:{
+            openNotificationWithIcon(type , msg , desc) {
+                this.$notification[type]({
+                    message: msg,
+                    description: desc,
+                });
+            },
             handleSubmit(e) {
                 e.preventDefault();
                 this.form.validateFields((err, values) => {
                     if (!err) {
-                        console.log('Received values of form: ', values);
+                        this.form.resetFields()
+                        this.openNotificationWithIcon('success', 'موفقیت' , 'پروپوزال اضافه شد')
                     }else {
                         console.log('errr')
                         this.activeKey = ['1','2','3']
-
                     }
                 });
             },
