@@ -33,15 +33,19 @@
 }
 @supports ((position:-webkit-sticky) or (position:sticky)){.sticky-bot{position:-webkit-sticky;position:sticky;bottom:0;z-index:10}}
 
-.ant-select-selection__choice{
-    float: right !important;
+
+.ant-select-tree{
+    direction: rtl !important;
 }
-.ant-select-search.ant-select-search--inline{
+.ant-select-tree li ul , .ant-tree li ul{
+    padding: 0 15px 0 0 !important;
+}
+.ant-tree-switcher{
     float: right !important;
-    margin-right: 4px !important;
 }
 .ant-select-selection-selected-value{
     float: right !important;
+    padding-right: 10px !important;
 }
 .ant-select-search__field{
     text-align: right !important;
@@ -49,4 +53,7 @@
 .ant-select-selection__placeholder{
     /*float: right;*/
     text-align: right !important;
+}
+.ant-select-dropdown-menu{
+    text-align: right;
 }

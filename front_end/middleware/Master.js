@@ -12,6 +12,6 @@ export default function ({ store, redirect }) {
         return redirect('/safePage')
     }
     else if (store.state.auth.role ==="TEACHER"){
-        return redirect('/safePage')
+        return redirect('/teacher/stdList')
     }
 }
