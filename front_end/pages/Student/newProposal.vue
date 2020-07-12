@@ -165,9 +165,8 @@
             return{
                 activeKey: ['1','2','3'],
                 form: this.$form.createForm(this, { name: 'newProposal' }),
-                teachers:[{name:'teacher' , group: 'نرم افزار' , id:0},
-                    {name:'t2222' , group: 'نرم افزار' , id:1},
-                    {name:'t3333' , group: 'نرم افزار' , id:2}],
+                teachers:[{name:'حسن حقیقی' , group: 'نرم افزار' , id:0},
+                    {name:'علیرضا شاملی' , group: 'نرم افزار' , id:1},],
                 words:['BigData' , 'Web' , 'AI'],
                 tgp:'',
                 beginDate:'',

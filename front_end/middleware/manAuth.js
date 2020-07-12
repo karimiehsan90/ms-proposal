@@ -3,7 +3,7 @@ export default function ({ store, redirect }) {
     if (!store.state.auth) {
         return redirect('/login')
     }
-    if (store.state.auth.role!=='TEACHER' && store.state.auth.role!=='MANAGER'){
+    if (store.state.auth.role!=="MANAGER"){
         return redirect('/')
     }
 }

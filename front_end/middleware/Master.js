@@ -9,9 +9,9 @@ export default function ({ store, redirect }) {
         return redirect('/Student/newProposal')
     }
     else if (store.state.auth.role ==="MANAGER"){
-        return redirect('/safePage')
+        return redirect('/Manager/Requests')
     }
     else if (store.state.auth.role ==="TEACHER"){
-        return redirect('/teacher/stdList')
+        return redirect('/Teacher/stdList')
     }
 }
