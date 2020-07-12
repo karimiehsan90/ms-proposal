@@ -10,7 +10,11 @@
             />
           </a-layout-header>
           <a-breadcrumb class="text-right mx-5 mt-3">
-            <a-breadcrumb-item>{{$store.state.auth.role==='ADMIN'?'ادمین':($store.state.auth.role==='STUDENT'?'دانشجو':'ندیر')}}</a-breadcrumb-item>
+            <a-breadcrumb-item>{{$store.state.auth.role==='ADMIN'?'ادمین':
+              ($store.state.auth.role==='STUDENT'?'دانشجو':
+              ($store.state.auth.role==='TEACHER'?'استاد':
+              'مدیر'
+              ))}}</a-breadcrumb-item>
             <a-breadcrumb-item>{{$store.state.page}}</a-breadcrumb-item>
           </a-breadcrumb>
           <a-layout-content
@@ -28,6 +32,12 @@
               <nuxt-link to="/admin/addUser">
               <a-icon type="user" />
               <span>اضافه کردن کاربر</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="2" v-if="role ==='ADMIN'">
+              <nuxt-link to="/admin/userList">
+                <a-icon type="video-camera" />
+                <span>لیست کاربران</span>
               </nuxt-link>
             </a-menu-item>
             <a-menu-item key="1" v-if="role ==='STUDENT'">
@@ -54,10 +64,28 @@
                 <span>لیست گزارش</span>
               </nuxt-link>
             </a-menu-item>
-            <a-menu-item key="2" v-if="role ==='ADMIN'">
-              <nuxt-link to="/admin/userList">
-              <a-icon type="video-camera" />
-              <span>لیست کاربران</span>
+            <a-menu-item key="1" v-if="role ==='TEACHER'">
+              <nuxt-link to="/teacher/stdList">
+                <a-icon type="user" />
+                <span>لیست دانشجویان</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="2" v-if="role ==='TEACHER'">
+              <nuxt-link to="/teacher/reports">
+                <a-icon type="form" />
+                <span>گزارشات پروژه</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="3" v-if="role ==='TEACHER'">
+              <nuxt-link to="/teacher/judge">
+                <a-icon type="crown" />
+                <span>داوری</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="4" v-if="role ==='TEACHER'">
+              <nuxt-link to="/teacher/calendar">
+                <a-icon type="calendar" />
+                <span>برنامه دفاع</span>
               </nuxt-link>
             </a-menu-item>
           </a-menu>
