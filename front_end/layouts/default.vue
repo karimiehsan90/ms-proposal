@@ -64,25 +64,37 @@
                 <span>لیست گزارش</span>
               </nuxt-link>
             </a-menu-item>
-            <a-menu-item key="1" v-if="role ==='TEACHER'">
+            <a-menu-item key="5" v-if="role === 'MANAGER'">
+              <nuxt-link to="/Manager/requests">
+                <a-icon type="bars" />
+                <span>لیست درخواست ها</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="6" v-if="role === 'MANAGER'">
+              <nuxt-link to="/Manager/setJudge">
+                <a-icon type="control" />
+                <span>تعیین داور</span>
+              </nuxt-link>
+            </a-menu-item>
+            <a-menu-item key="1" v-if="role ==='TEACHER' || role === 'MANAGER'">
               <nuxt-link to="/teacher/stdList">
                 <a-icon type="user" />
                 <span>لیست دانشجویان</span>
               </nuxt-link>
             </a-menu-item>
-            <a-menu-item key="2" v-if="role ==='TEACHER'">
+            <a-menu-item key="2" v-if="role ==='TEACHER' || role === 'MANAGER'">
               <nuxt-link to="/teacher/reports">
                 <a-icon type="form" />
                 <span>گزارشات پروژه</span>
               </nuxt-link>
             </a-menu-item>
-            <a-menu-item key="3" v-if="role ==='TEACHER'">
+            <a-menu-item key="3" v-if="role ==='TEACHER' || role === 'MANAGER'">
               <nuxt-link to="/teacher/judge">
                 <a-icon type="crown" />
                 <span>داوری</span>
               </nuxt-link>
             </a-menu-item>
-            <a-menu-item key="4" v-if="role ==='TEACHER'">
+            <a-menu-item key="4" v-if="role ==='TEACHER' || role === 'MANAGER'">
               <nuxt-link to="/teacher/calendar">
                 <a-icon type="calendar" />
                 <span>برنامه دفاع</span>
