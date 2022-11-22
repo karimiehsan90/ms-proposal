@@ -17,7 +17,7 @@
     "babel-plugin-import": "^1.13.0",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
-    "nuxt": "^2.0.0",
+    "nuxt": "^2.15.8",
     "popper.js": "^1.15.0",
     "vue-persian-datetime-picker": "^2.1.4",
     "vuelidate": "^0.7.5",
